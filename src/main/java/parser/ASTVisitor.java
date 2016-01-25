@@ -28,4 +28,16 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
     public AST visitBooLit(CCalcParser.BooLitContext ctx) {
         return new BooLit(Boolean.parseBoolean(ctx.getText()));
     }
+
+	public AST visitParExp(CCalcParser.ParExpContext ctx) {
+		Expression expr = (Expression)visit(ctx.expression());
+		return new ParExp(expr);
+	}
+
+    public AST visitBinExp(CCalcParser.BinExpContext ctx) {
+        Expression expr1 = (Expression)visit(ctx.getChild(0));
+        Expression expr2 = (Expression)visit(ctx.getChild(2));
+        Operator operator = Operator.fromString(ctx.getChild(1).getText());
+        return new BinExp(operator, expr1, expr2);
+    }
 }

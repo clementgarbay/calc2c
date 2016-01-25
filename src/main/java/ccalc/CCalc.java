@@ -1,5 +1,6 @@
 package ccalc;
 
+import ast.Operator;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
@@ -26,7 +27,7 @@ public class CCalc {
 	static boolean verbose = true;
 	
     public static void main(String[] args) throws Exception {
-        String inputFile = null; 
+        String inputFile = null;
         if ( args.length>0 ) inputFile = args[0];        
         if (args.length>1 && args[1].equals("-v")) verbose = true;
         InputStream is = System.in;

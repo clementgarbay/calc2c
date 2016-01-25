@@ -26,6 +26,13 @@ public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
 	T visitBody(@NotNull CCalcParser.BodyContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link CCalcParser#BinExp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinExp(@NotNull CCalcParser.BinExpContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link CCalcParser#program}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -38,4 +45,11 @@ public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIntLit(@NotNull CCalcParser.IntLitContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CCalcParser#ParExp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParExp(@NotNull CCalcParser.ParExpContext ctx);
 }
