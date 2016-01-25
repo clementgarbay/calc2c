@@ -1,2 +1,3 @@
-WS=2
+WS=3
 INTLIT=1
+BOOLIT=2

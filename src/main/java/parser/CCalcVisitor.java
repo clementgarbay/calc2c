@@ -1,4 +1,4 @@
-// Generated from /Users/noye/Documents/Teaching/FIL1/SELP/workspace/CCalcV0/src/parser/CCalc.g4 by ANTLR 4.1
+// Generated from /Users/clementgarbay/Documents/Mines/Langage de programmation/Structure et exécution des langages de programmation/calc2c/src/main/java/parser/CCalc.g4 by ANTLR 4.1
 package parser;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
@@ -11,6 +11,13 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * operations with no return type.
  */
 public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
+	/**
+	 * Visit a parse tree produced by {@link CCalcParser#BooLit}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBooLit(@NotNull CCalcParser.BooLitContext ctx);
+
 	/**
 	 * Visit a parse tree produced by {@link CCalcParser#body}.
 	 * @param ctx the parse tree

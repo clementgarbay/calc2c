@@ -1,4 +1,4 @@
-// Generated from /Users/noye/Documents/Teaching/FIL1/SELP/workspace/CCalcV0/src/parser/CCalc.g4 by ANTLR 4.1
+// Generated from /Users/clementgarbay/Documents/Mines/Langage de programmation/Structure et exécution des langages de programmation/calc2c/src/main/java/parser/CCalc.g4 by ANTLR 4.1
 package parser;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
@@ -12,6 +12,14 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * operations with no return type.
  */
 public class CCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements CCalcVisitor<T> {
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitBooLit(@NotNull CCalcParser.BooLitContext ctx) { return visitChildren(ctx); }
+
 	/**
 	 * {@inheritDoc}
 	 * <p/>
