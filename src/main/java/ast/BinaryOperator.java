@@ -5,26 +5,27 @@ import java.util.Arrays;
 /**
  * Created by clementgarbay on 25/01/2016.
  */
-public enum Operator {
+public enum BinaryOperator {
     PLUS ("+"),
     MINUS ("-"),
     TIMES ("*"),
     DIVIDE ("/"),
     LOWER ("<"),
-    GREATER (">");
+    GREATER (">"),
+    COMPARE ("==");
 
     private final String op;
 
-    Operator(final String op) {
+    BinaryOperator(final String op) {
         this.op = op;
     }
 
-    public static Operator fromString(String op){
-        return Arrays.asList(Operator.values())
+    public static BinaryOperator fromString(String op){
+        return Arrays.asList(BinaryOperator.values())
                 .stream()
                 .filter(e -> op.equalsIgnoreCase(e.op))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(op + " is not value of Operator"));
+                .orElseThrow(() -> new IllegalArgumentException(op + " is not value of BinaryOperator"));
     }
 
     @Override

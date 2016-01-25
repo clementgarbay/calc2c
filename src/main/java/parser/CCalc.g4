@@ -6,19 +6,25 @@ program  : body
          ;
 body     : expression
          ;
-expression : INTLIT                     # IntLit
-           | BOOLIT                     # BooLit
-           | '(' expression ')'         # ParExp
-           | expression OP expression   # BinExp
+expression : (MINUS | NOT) expression                   # UnaExp
+           | expression (MINUS | OP) expression         # BinExp
+           | expression '?' expression ':' expression   # CondExp
+           | '(' expression ')'                         # ParExp
+           | BOOLIT                                     # BooLit
+           | INTLIT                                     # IntLit
            ;
 
 // lexical rules
 
-INTLIT   : '0' | ('1'..'9')('0'..'9')*  
+INTLIT   : '0' | ('1'..'9')('0'..'9')*
          ;
 BOOLIT   : 'true' | 'false'
          ;
-OP       : '+' |'-' |'*' |'/' |'<' |'>'
+MINUS    : '-'
+         ;
+NOT      : '!'
+         ;
+OP       : '+' | '*' | '/' | '<' | '>' | '=='
          ;
 WS       : ('\t' | '\n' | '\r' | ' ') -> skip
          ;

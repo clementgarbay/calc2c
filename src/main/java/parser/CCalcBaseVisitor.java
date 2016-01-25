@@ -18,6 +18,14 @@ public class CCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
+	@Override public T visitCondExp(@NotNull CCalcParser.CondExpContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
 	@Override public T visitBooLit(@NotNull CCalcParser.BooLitContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -51,6 +59,14 @@ public class CCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public T visitIntLit(@NotNull CCalcParser.IntLitContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitUnaExp(@NotNull CCalcParser.UnaExpContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}

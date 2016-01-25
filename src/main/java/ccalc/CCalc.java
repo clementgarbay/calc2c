@@ -1,6 +1,5 @@
 package ccalc;
 
-import ast.Operator;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 

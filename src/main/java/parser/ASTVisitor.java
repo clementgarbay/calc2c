@@ -37,7 +37,20 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
     public AST visitBinExp(CCalcParser.BinExpContext ctx) {
         Expression expr1 = (Expression)visit(ctx.getChild(0));
         Expression expr2 = (Expression)visit(ctx.getChild(2));
-        Operator operator = Operator.fromString(ctx.getChild(1).getText());
+        BinaryOperator operator = BinaryOperator.fromString(ctx.getChild(1).getText());
         return new BinExp(operator, expr1, expr2);
+    }
+
+    public AST visitUnaExp(CCalcParser.UnaExpContext ctx) {
+        UnaryOperator operator = UnaryOperator.fromString(ctx.getChild(0).getText());
+        Expression expr = (Expression)visit(ctx.getChild(1));
+        return new UnaExp(operator, expr);
+    }
+
+    public AST visitCondExp(CCalcParser.CondExpContext ctx) {
+        Expression expr1 = (Expression)visit(ctx.getChild(0));
+        Expression expr2 = (Expression)visit(ctx.getChild(2));
+        Expression expr3 = (Expression)visit(ctx.getChild(4));
+        return new CondExp(expr1, expr2, expr3);
     }
 }
