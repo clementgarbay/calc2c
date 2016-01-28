@@ -14,7 +14,8 @@ public enum BinaryOperator {
     GREATER (">"),
     LOWER_OR_EQUAL ("<="),
     GREATER_OR_EQUAL (">="),
-    COMPARE ("=="),
+    EQUALS ("=="),
+    NOT_EQUALS ("!="),
     AND ("&&"),
     OR ("||");
 

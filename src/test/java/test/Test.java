@@ -13,6 +13,7 @@ import ccalc.CCalc;
  * @since 	2016-01-27
  */
 public abstract class Test {
+
 	static int count = 0;
 	static int success = 0;
 	
@@ -21,6 +22,7 @@ public abstract class Test {
 	}
 	// assumes the path environment variable has been updated so that bash (and gcc) is in the path	
 	static final String SHELL = "bash";
+	static final String PATH = "src/test/resources/";
 	
 	/**
 	 * Executes a test.

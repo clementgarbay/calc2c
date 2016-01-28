@@ -6,8 +6,13 @@ program  : body EOF
          ;
 body     : expression
          ;
-expression : (MINUS | NOT) expression                               # UnaExp
-           | expression (MINUS | OP) expression                     # BinExp
+expression : ('-' | '!') expression                                 # UnaExp
+           | expression ('*' | '/') expression                      # BinExp
+           | expression ('+' | '-') expression                      # BinExp
+           | expression ('<' | '>' | '<=' | '>=') expression        # BinExp
+           | expression ('==' | '!=') expression                    # BinExp
+           | expression ('&&') expression                           # BinExp
+           | expression ('||') expression                           # BinExp
            | expression '?'<assoc=right> expression ':' expression  # CondExp
            | '(' expression ')'                                     # ParExp
            | BOOLIT                                                 # BooLit
@@ -19,12 +24,6 @@ expression : (MINUS | NOT) expression                               # UnaExp
 INTLIT   : '0' | ('1'..'9')('0'..'9')*
          ;
 BOOLIT   : 'true' | 'false'
-         ;
-MINUS    : '-'
-         ;
-NOT      : '!'
-         ;
-OP       : '+' | '*' | '/' | '<' | '>' | '=='
          ;
 WS       : ('\t' | '\n' | '\r' | ' ') -> skip
          ;
