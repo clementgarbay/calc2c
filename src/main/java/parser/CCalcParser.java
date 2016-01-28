@@ -241,20 +241,20 @@ public class CCalcParser extends Parser {
 				setState(16); match(1);
 				}
 				break;
-			case BOOLIT:
-				{
-				_localctx = new BooLitContext(_localctx);
-				_ctx = _localctx;
-				_prevctx = _localctx;
-				setState(18); match(BOOLIT);
-				}
-				break;
 			case INTLIT:
 				{
 				_localctx = new IntLitContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(19); match(INTLIT);
+				setState(18); match(INTLIT);
+				}
+				break;
+			case BOOLIT:
+				{
+				_localctx = new BooLitContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(19); match(BOOLIT);
 				}
 				break;
 			default:
@@ -427,7 +427,7 @@ public class CCalcParser extends Parser {
 		"\17\22\22\4\2\n\n\20\20<\2\b\3\2\2\2\4\13\3\2\2\2\6\26\3\2\2\2\b\t\5\4"+
 		"\3\2\t\n\7\2\2\3\n\3\3\2\2\2\13\f\5\6\4\2\f\5\3\2\2\2\r\16\b\4\1\2\16"+
 		"\17\t\2\2\2\17\27\5\6\4\2\20\21\7\b\2\2\21\22\5\6\4\2\22\23\7\3\2\2\23"+
-		"\27\3\2\2\2\24\27\7\25\2\2\25\27\7\24\2\2\26\r\3\2\2\2\26\20\3\2\2\2\26"+
+		"\27\3\2\2\2\24\27\7\24\2\2\25\27\7\25\2\2\26\r\3\2\2\2\26\20\3\2\2\2\26"+
 		"\24\3\2\2\2\26\25\3\2\2\2\27\62\3\2\2\2\30\31\6\4\2\3\31\32\t\3\2\2\32"+
 		"\61\5\6\4\2\33\34\6\4\3\3\34\35\t\4\2\2\35\61\5\6\4\2\36\37\6\4\4\3\37"+
 		" \t\5\2\2 \61\5\6\4\2!\"\6\4\5\3\"#\t\6\2\2#\61\5\6\4\2$%\6\4\6\3%&\7"+

@@ -15,9 +15,10 @@ expression : ('-' | '!') expression                                 # UnaExp
            | expression ('||') expression                           # BinExp
            | expression '?'<assoc=right> expression ':' expression  # CondExp
            | '(' expression ')'                                     # ParExp
-           | BOOLIT                                                 # BooLit
            | INTLIT                                                 # IntLit
+           | BOOLIT                                                 # BooLit
            ;
+           
 
 // lexical rules
 

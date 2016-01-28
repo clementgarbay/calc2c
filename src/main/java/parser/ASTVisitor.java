@@ -22,7 +22,7 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
 	}
 
 	public AST visitIntLit(CCalcParser.IntLitContext ctx) {
-		return new IntLit(Integer.parseInt(ctx.getText()));
+        return new IntLit(Integer.parseInt(ctx.getText()));
 	}
 
     public AST visitBooLit(CCalcParser.BooLitContext ctx) {
