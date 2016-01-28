@@ -6,4 +6,9 @@ public class IntLit extends Expression {
 	public IntLit(int value) {
 		this.value = value;
 	}
+
+	@Override
+	public String gen(int padding) {
+		return this.paddingToSpace(padding) + Integer.toString(this.value);
+	}
 }

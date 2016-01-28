@@ -12,7 +12,11 @@ public enum BinaryOperator {
     DIVIDE ("/"),
     LOWER ("<"),
     GREATER (">"),
-    COMPARE ("==");
+    LOWER_OR_EQUAL ("<="),
+    GREATER_OR_EQUAL (">="),
+    COMPARE ("=="),
+    AND ("&&"),
+    OR ("||");
 
     private final String op;
 
@@ -20,7 +24,7 @@ public enum BinaryOperator {
         this.op = op;
     }
 
-    public static BinaryOperator fromString(String op){
+    public static BinaryOperator fromString(String op) {
         return Arrays.asList(BinaryOperator.values())
                 .stream()
                 .filter(e -> op.equalsIgnoreCase(e.op))

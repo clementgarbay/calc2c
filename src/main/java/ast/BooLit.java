@@ -9,4 +9,9 @@ public class BooLit extends Expression {
     public BooLit(boolean value) {
         this.value = value;
     }
+
+    @Override
+    public String gen(int padding) {
+        return this.paddingToSpace(padding) + Boolean.toString(this.value);
+    }
 }

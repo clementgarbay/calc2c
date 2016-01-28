@@ -1,9 +1,24 @@
 package ast;
 
 import java.lang.reflect.Field;
+import java.util.stream.IntStream;
 
-public class AST {
-	public String toString() {
+public abstract class AST {
+
+    public abstract String gen(int padding);
+
+    public String gen() {
+        return this.gen(0);
+    }
+
+    public String paddingToSpace(int padding) {
+        StringBuilder stringBuilder = new StringBuilder();
+        IntStream.range(0, padding).forEach(e -> stringBuilder.append(" "));
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public String toString() {
 		// retrieve class of node
 		Class<? extends AST> tclass = this.getClass();
 		// isolate relative name (starting after the rightmost '.')

@@ -9,4 +9,9 @@ public class ParExp extends Expression {
     public ParExp(Expression expression) {
         this.expression = expression;
     }
+
+    @Override
+    public String gen(int padding) {
+        return '(' + expression.gen(padding) + ')';
+    }
 }

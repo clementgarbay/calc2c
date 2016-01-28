@@ -15,5 +15,8 @@ public class BinExp extends Expression {
         this.expr2 = expr2;
     }
 
-
+    @Override
+    public String gen(int padding) {
+        return this.paddingToSpace(padding) + this.expr1.gen(0) + " " + this.operator.toString() + this.expr2.gen(1);
+    }
 }

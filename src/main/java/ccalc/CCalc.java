@@ -45,7 +45,7 @@ public class CCalc {
         	AST ast = visitor.visit(tree);
         	if (verbose) System.out.println(ast);
 //        	((Program)ast) .collect();
-//        	write(ast.gen(), inputFile);
+            write(ast.gen(), inputFile);
        } else throw new SyntaxError();
         
     }

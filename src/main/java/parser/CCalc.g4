@@ -2,16 +2,16 @@ grammar CCalc;
 
 // syntactic rules
 
-program  : body
+program  : body EOF
          ;
 body     : expression
          ;
-expression : (MINUS | NOT) expression                   # UnaExp
-           | expression (MINUS | OP) expression         # BinExp
-           | expression '?' expression ':' expression   # CondExp
-           | '(' expression ')'                         # ParExp
-           | BOOLIT                                     # BooLit
-           | INTLIT                                     # IntLit
+expression : (MINUS | NOT) expression                               # UnaExp
+           | expression (MINUS | OP) expression                     # BinExp
+           | expression '?'<assoc=right> expression ':' expression  # CondExp
+           | '(' expression ')'                                     # ParExp
+           | BOOLIT                                                 # BooLit
+           | INTLIT                                                 # IntLit
            ;
 
 // lexical rules

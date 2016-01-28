@@ -12,4 +12,9 @@ public class UnaExp extends Expression {
         this.operator = operator;
         this.expr = expr;
     }
+
+    @Override
+    public String gen(int padding) {
+        return this.paddingToSpace(padding) + this.operator + this.expr.gen(1);
+    }
 }
