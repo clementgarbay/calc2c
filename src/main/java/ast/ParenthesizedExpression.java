@@ -11,7 +11,7 @@ public class ParenthesizedExpression extends Expression {
     }
 
     @Override
-    public Class<? extends PrimitiveType> getFinalType() {
+    public Type getFinalType() {
         return this.expression.getFinalType();
     }
 

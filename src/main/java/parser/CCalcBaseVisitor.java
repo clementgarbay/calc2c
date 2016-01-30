@@ -34,7 +34,7 @@ public class CCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitProgram(@NotNull CCalcParser.ProgramContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDefinition(@NotNull CCalcParser.DefinitionContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -42,7 +42,7 @@ public class CCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitBooleanExpression(@NotNull CCalcParser.BooleanExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitProgram(@NotNull CCalcParser.ProgramContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -58,7 +58,7 @@ public class CCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitIntegerExpression(@NotNull CCalcParser.IntegerExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIntegerType(@NotNull CCalcParser.IntegerTypeContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -75,4 +75,28 @@ public class CCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 	@Override public T visitConditionalExpression(@NotNull CCalcParser.ConditionalExpressionContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitStringType(@NotNull CCalcParser.StringTypeContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitVariable(@NotNull CCalcParser.VariableContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitBooleanType(@NotNull CCalcParser.BooleanTypeContext ctx) { return visitChildren(ctx); }
 }

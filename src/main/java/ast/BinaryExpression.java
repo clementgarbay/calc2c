@@ -21,7 +21,7 @@ public class BinaryExpression extends Expression {
     }
 
     @Override
-    public Class<? extends PrimitiveType> getFinalType() {
+    public Type getFinalType() {
         // Type checking
         if (this.expr1.getFinalType() != this.expr2.getFinalType()) throw new IncompatibleTypeException();
 
@@ -33,16 +33,9 @@ public class BinaryExpression extends Expression {
         // Type checking
         if (this.expr1.getFinalType() != this.expr2.getFinalType()) throw new IncompatibleTypeException();
         // Division by 0
-        if (this.operator.equals(BinaryOperator.DIVIDE) && this.expr2.equals(new IntegerExpression(0))) throw new ArithmeticException("Division by 0");
+        if (this.operator.equals(BinaryOperator.DIVIDE) && this.expr2.equals(new IntegerType(0))) throw new ArithmeticException("Division by 0");
         // Operator acceptance
-        boolean operatorAccepted = true;
-        try {
-            // To invoke the right "acceptsOperator" method from classname of the final type
-            // TODO : review the how to proceed
-            Method method = this.expr1.getFinalType().getMethod("acceptsOperator", Operator.class);
-            operatorAccepted = (boolean) method.invoke(this.expr1, this.operator);
-        } catch (Exception ignored) {}
-        if (!operatorAccepted) throw new IncompatibleOperatorException();
+        if (!this.expr1.getFinalType().acceptsOperator(this.operator)) throw new IncompatibleOperatorException();
 
         return this.paddingToSpace(padding) + this.expr1.gen(0) + " " + this.operator.toString() + this.expr2.gen(1);
     }

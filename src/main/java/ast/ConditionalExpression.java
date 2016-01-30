@@ -18,7 +18,7 @@ public class ConditionalExpression extends Expression {
     }
 
     @Override
-    public Class<? extends PrimitiveType> getFinalType() {
+    public Type getFinalType() {
         // Type checking
         if (this.expr2.getFinalType() != this.expr3.getFinalType()) throw new IncompatibleTypeException();
 

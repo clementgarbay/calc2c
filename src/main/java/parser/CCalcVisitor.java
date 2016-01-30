@@ -26,18 +26,18 @@ public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
 	T visitBody(@NotNull CCalcParser.BodyContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link CCalcParser#definition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefinition(@NotNull CCalcParser.DefinitionContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link CCalcParser#program}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitProgram(@NotNull CCalcParser.ProgramContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link CCalcParser#BooleanExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBooleanExpression(@NotNull CCalcParser.BooleanExpressionContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link CCalcParser#ParenthesizedExpression}.
@@ -47,11 +47,11 @@ public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
 	T visitParenthesizedExpression(@NotNull CCalcParser.ParenthesizedExpressionContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link CCalcParser#IntegerExpression}.
+	 * Visit a parse tree produced by {@link CCalcParser#IntegerType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIntegerExpression(@NotNull CCalcParser.IntegerExpressionContext ctx);
+	T visitIntegerType(@NotNull CCalcParser.IntegerTypeContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link CCalcParser#UnaryExpression}.
@@ -66,4 +66,25 @@ public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitConditionalExpression(@NotNull CCalcParser.ConditionalExpressionContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CCalcParser#StringType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStringType(@NotNull CCalcParser.StringTypeContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CCalcParser#variable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariable(@NotNull CCalcParser.VariableContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CCalcParser#BooleanType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBooleanType(@NotNull CCalcParser.BooleanTypeContext ctx);
 }

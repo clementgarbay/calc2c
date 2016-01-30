@@ -2,6 +2,9 @@ package parser;
 
 import ast.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ASTVisitor extends CCalcBaseVisitor<AST> {
 	public AST visitProgram(CCalcParser.ProgramContext ctx) {
         // retrieve ASTs for functions
@@ -16,17 +19,38 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
         return new Program(body);
 	}
 	
-	public AST visitBody(CCalcParser.BodyContext ctx) { 
-		Expression expr = (Expression)visit(ctx.expression()); 
-		return new Body(expr); 
+	public AST visitBody(CCalcParser.BodyContext ctx) {
+        List<Definition> definitions = new ArrayList<>();
+
+        ctx.definition()
+                .stream()
+                .forEach(def -> definitions.add((Definition) visit(def)));
+
+		Expression expr = (Expression)visit(ctx.expression());
+
+		return new Body(definitions, expr);
 	}
 
-	public AST visitIntegerExpression(CCalcParser.IntegerExpressionContext ctx) {
-        return new IntegerExpression(Integer.parseInt(ctx.getText()));
+    public AST visitVariable(CCalcParser.VariableContext ctx) {
+        return new Variable(ctx.getText());
+    }
+
+    public AST visitDefinition(CCalcParser.DefinitionContext ctx) {
+        Variable variable = (Variable)visit(ctx.getChild(0));
+        Expression expression = (Expression) visit(ctx.getChild(2));
+        return new Definition(variable, expression);
+    }
+
+	public AST visitIntegerType(CCalcParser.IntegerTypeContext ctx) {
+        return new IntegerType(Integer.parseInt(ctx.getText()));
 	}
 
-    public AST visitBooleanExpression(CCalcParser.BooleanExpressionContext ctx) {
-        return new BooleanExpression(Boolean.parseBoolean(ctx.getText()));
+    public AST visitBooleanType(CCalcParser.BooleanTypeContext ctx) {
+        return new BooleanType(Boolean.parseBoolean(ctx.getText()));
+    }
+
+    public AST visitStringType(CCalcParser.StringTypeContext ctx) {
+        return new StringType(ctx.getText());
     }
 
 	public AST visitParenthesizedExpression(CCalcParser.ParenthesizedExpressionContext ctx) {

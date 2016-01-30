@@ -15,18 +15,19 @@ public class CCalcParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__16=1, T__15=2, T__14=3, T__13=4, T__12=5, T__11=6, T__10=7, T__9=8, 
-		T__8=9, T__7=10, T__6=11, T__5=12, T__4=13, T__3=14, T__2=15, T__1=16, 
-		T__0=17, INTLIT=18, BOOLIT=19, WS=20;
+		T__17=1, T__16=2, T__15=3, T__14=4, T__13=5, T__12=6, T__11=7, T__10=8, 
+		T__9=9, T__8=10, T__7=11, T__6=12, T__5=13, T__4=14, T__3=15, T__2=16, 
+		T__1=17, T__0=18, IDENTIFIER=19, INT=20, BOOL=21, WS=22;
 	public static final String[] tokenNames = {
-		"<INVALID>", "')'", "'+'", "'*'", "'-'", "':'", "'('", "'<'", "'!='", 
-		"'<='", "'&&'", "'?'", "'||'", "'>'", "'=='", "'/'", "'>='", "'!'", "INTLIT", 
-		"BOOLIT", "WS"
+		"<INVALID>", "')'", "'+'", "'*'", "'-'", "':'", "'('", "'<'", "'='", "'!='", 
+		"'<='", "'&&'", "'?'", "'||'", "'>'", "'=='", "'/'", "'>='", "'!'", "IDENTIFIER", 
+		"INT", "BOOL", "WS"
 	};
 	public static final int
-		RULE_program = 0, RULE_body = 1, RULE_expression = 2;
+		RULE_program = 0, RULE_body = 1, RULE_definition = 2, RULE_expression = 3, 
+		RULE_variable = 4;
 	public static final String[] ruleNames = {
-		"program", "body", "expression"
+		"program", "body", "definition", "expression", "variable"
 	};
 
 	@Override
@@ -67,8 +68,8 @@ public class CCalcParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(6); body();
-			setState(7); match(EOF);
+			setState(10); body();
+			setState(11); match(EOF);
 			}
 		}
 		catch (RecognitionException re) {
@@ -83,6 +84,12 @@ public class CCalcParser extends Parser {
 	}
 
 	public static class BodyContext extends ParserRuleContext {
+		public List<DefinitionContext> definition() {
+			return getRuleContexts(DefinitionContext.class);
+		}
+		public DefinitionContext definition(int i) {
+			return getRuleContext(DefinitionContext.class,i);
+		}
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
@@ -101,9 +108,65 @@ public class CCalcParser extends Parser {
 		BodyContext _localctx = new BodyContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_body);
 		try {
+			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(9); expression(0);
+			setState(16);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,0,_ctx);
+			while ( _alt!=2 && _alt!=-1 ) {
+				if ( _alt==1 ) {
+					{
+					{
+					setState(13); definition();
+					}
+					} 
+				}
+				setState(18);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,0,_ctx);
+			}
+			setState(19); expression(0);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class DefinitionContext extends ParserRuleContext {
+		public VariableContext variable() {
+			return getRuleContext(VariableContext.class,0);
+		}
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public DefinitionContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_definition; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitDefinition(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final DefinitionContext definition() throws RecognitionException {
+		DefinitionContext _localctx = new DefinitionContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_definition);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(21); variable();
+			setState(22); match(8);
+			setState(23); expression(0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -157,21 +220,12 @@ public class CCalcParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class BooleanExpressionContext extends ExpressionContext {
-		public TerminalNode BOOLIT() { return getToken(CCalcParser.BOOLIT, 0); }
-		public BooleanExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+	public static class IntegerTypeContext extends ExpressionContext {
+		public TerminalNode INT() { return getToken(CCalcParser.INT, 0); }
+		public IntegerTypeContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitBooleanExpression(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class IntegerExpressionContext extends ExpressionContext {
-		public TerminalNode INTLIT() { return getToken(CCalcParser.INTLIT, 0); }
-		public IntegerExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitIntegerExpression(this);
+			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitIntegerType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -183,6 +237,15 @@ public class CCalcParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitUnaryExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class StringTypeContext extends ExpressionContext {
+		public TerminalNode IDENTIFIER() { return getToken(CCalcParser.IDENTIFIER, 0); }
+		public StringTypeContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitStringType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -200,35 +263,44 @@ public class CCalcParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class BooleanTypeContext extends ExpressionContext {
+		public TerminalNode BOOL() { return getToken(CCalcParser.BOOL, 0); }
+		public BooleanTypeContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitBooleanType(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 
 	public final ExpressionContext expression(int _p) throws RecognitionException {
 		ParserRuleContext _parentctx = _ctx;
 		int _parentState = getState();
 		ExpressionContext _localctx = new ExpressionContext(_ctx, _parentState, _p);
 		ExpressionContext _prevctx = _localctx;
-		int _startState = 4;
+		int _startState = 6;
 		enterRecursionRule(_localctx, RULE_expression);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(20);
+			setState(35);
 			switch (_input.LA(1)) {
 			case 4:
-			case 17:
+			case 18:
 				{
 				_localctx = new UnaryExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(12);
+				setState(26);
 				_la = _input.LA(1);
-				if ( !(_la==4 || _la==17) ) {
+				if ( !(_la==4 || _la==18) ) {
 				_errHandler.recoverInline(this);
 				}
 				consume();
-				setState(13); expression(11);
+				setState(27); expression(12);
 				}
 				break;
 			case 6:
@@ -236,54 +308,62 @@ public class CCalcParser extends Parser {
 				_localctx = new ParenthesizedExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(14); match(6);
-				setState(15); expression(0);
-				setState(16); match(1);
+				setState(28); match(6);
+				setState(29); expression(0);
+				setState(30); match(1);
 				}
 				break;
-			case INTLIT:
+			case INT:
 				{
-				_localctx = new IntegerExpressionContext(_localctx);
+				_localctx = new IntegerTypeContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(18); match(INTLIT);
+				setState(32); match(INT);
 				}
 				break;
-			case BOOLIT:
+			case BOOL:
 				{
-				_localctx = new BooleanExpressionContext(_localctx);
+				_localctx = new BooleanTypeContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(19); match(BOOLIT);
+				setState(33); match(BOOL);
+				}
+				break;
+			case IDENTIFIER:
+				{
+				_localctx = new StringTypeContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(34); match(IDENTIFIER);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(48);
+			setState(63);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			while ( _alt!=2 && _alt!=-1 ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(46);
-					switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
+					setState(61);
+					switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 					case 1:
 						{
 						_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(22);
-						if (!(10 >= _localctx._p)) throw new FailedPredicateException(this, "10 >= $_p");
-						setState(23);
+						setState(37);
+						if (!(11 >= _localctx._p)) throw new FailedPredicateException(this, "11 >= $_p");
+						setState(38);
 						_la = _input.LA(1);
-						if ( !(_la==3 || _la==15) ) {
+						if ( !(_la==3 || _la==16) ) {
 						_errHandler.recoverInline(this);
 						}
 						consume();
-						setState(24); expression(11);
+						setState(39); expression(12);
 						}
 						break;
 
@@ -291,15 +371,15 @@ public class CCalcParser extends Parser {
 						{
 						_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(25);
-						if (!(9 >= _localctx._p)) throw new FailedPredicateException(this, "9 >= $_p");
-						setState(26);
+						setState(40);
+						if (!(10 >= _localctx._p)) throw new FailedPredicateException(this, "10 >= $_p");
+						setState(41);
 						_la = _input.LA(1);
 						if ( !(_la==2 || _la==4) ) {
 						_errHandler.recoverInline(this);
 						}
 						consume();
-						setState(27); expression(10);
+						setState(42); expression(11);
 						}
 						break;
 
@@ -307,15 +387,15 @@ public class CCalcParser extends Parser {
 						{
 						_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(28);
-						if (!(8 >= _localctx._p)) throw new FailedPredicateException(this, "8 >= $_p");
-						setState(29);
+						setState(43);
+						if (!(9 >= _localctx._p)) throw new FailedPredicateException(this, "9 >= $_p");
+						setState(44);
 						_la = _input.LA(1);
-						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 7) | (1L << 9) | (1L << 13) | (1L << 16))) != 0)) ) {
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 7) | (1L << 10) | (1L << 14) | (1L << 17))) != 0)) ) {
 						_errHandler.recoverInline(this);
 						}
 						consume();
-						setState(30); expression(9);
+						setState(45); expression(10);
 						}
 						break;
 
@@ -323,15 +403,15 @@ public class CCalcParser extends Parser {
 						{
 						_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(31);
-						if (!(7 >= _localctx._p)) throw new FailedPredicateException(this, "7 >= $_p");
-						setState(32);
+						setState(46);
+						if (!(8 >= _localctx._p)) throw new FailedPredicateException(this, "8 >= $_p");
+						setState(47);
 						_la = _input.LA(1);
-						if ( !(_la==8 || _la==14) ) {
+						if ( !(_la==9 || _la==15) ) {
 						_errHandler.recoverInline(this);
 						}
 						consume();
-						setState(33); expression(8);
+						setState(48); expression(9);
 						}
 						break;
 
@@ -339,12 +419,12 @@ public class CCalcParser extends Parser {
 						{
 						_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(34);
-						if (!(6 >= _localctx._p)) throw new FailedPredicateException(this, "6 >= $_p");
+						setState(49);
+						if (!(7 >= _localctx._p)) throw new FailedPredicateException(this, "7 >= $_p");
 						{
-						setState(35); match(10);
+						setState(50); match(11);
 						}
-						setState(36); expression(7);
+						setState(51); expression(8);
 						}
 						break;
 
@@ -352,12 +432,12 @@ public class CCalcParser extends Parser {
 						{
 						_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(37);
-						if (!(5 >= _localctx._p)) throw new FailedPredicateException(this, "5 >= $_p");
+						setState(52);
+						if (!(6 >= _localctx._p)) throw new FailedPredicateException(this, "6 >= $_p");
 						{
-						setState(38); match(12);
+						setState(53); match(13);
 						}
-						setState(39); expression(6);
+						setState(54); expression(7);
 						}
 						break;
 
@@ -365,20 +445,20 @@ public class CCalcParser extends Parser {
 						{
 						_localctx = new ConditionalExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(40);
-						if (!(4 >= _localctx._p)) throw new FailedPredicateException(this, "4 >= $_p");
-						setState(41); match(11);
-						setState(42); expression(0);
-						setState(43); match(5);
-						setState(44); expression(4);
+						setState(55);
+						if (!(5 >= _localctx._p)) throw new FailedPredicateException(this, "5 >= $_p");
+						setState(56); match(12);
+						setState(57); expression(0);
+						setState(58); match(5);
+						setState(59); expression(5);
 						}
 						break;
 					}
 					} 
 				}
-				setState(50);
+				setState(65);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
 			}
 			}
 		}
@@ -393,49 +473,85 @@ public class CCalcParser extends Parser {
 		return _localctx;
 	}
 
+	public static class VariableContext extends ParserRuleContext {
+		public TerminalNode IDENTIFIER() { return getToken(CCalcParser.IDENTIFIER, 0); }
+		public VariableContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_variable; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitVariable(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final VariableContext variable() throws RecognitionException {
+		VariableContext _localctx = new VariableContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_variable);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(66); match(IDENTIFIER);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 2: return expression_sempred((ExpressionContext)_localctx, predIndex);
+		case 3: return expression_sempred((ExpressionContext)_localctx, predIndex);
 		}
 		return true;
 	}
 	private boolean expression_sempred(ExpressionContext _localctx, int predIndex) {
 		switch (predIndex) {
-		case 0: return 10 >= _localctx._p;
+		case 0: return 11 >= _localctx._p;
 
-		case 1: return 9 >= _localctx._p;
+		case 1: return 10 >= _localctx._p;
 
-		case 2: return 8 >= _localctx._p;
+		case 2: return 9 >= _localctx._p;
 
-		case 3: return 7 >= _localctx._p;
+		case 3: return 8 >= _localctx._p;
 
-		case 4: return 6 >= _localctx._p;
+		case 4: return 7 >= _localctx._p;
 
-		case 5: return 5 >= _localctx._p;
+		case 5: return 6 >= _localctx._p;
 
-		case 6: return 4 >= _localctx._p;
+		case 6: return 5 >= _localctx._p;
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\3\uacf5\uee8c\u4f5d\u8b0d\u4a45\u78bd\u1b2f\u3378\3\26\66\4\2\t\2\4\3"+
-		"\t\3\4\4\t\4\3\2\3\2\3\2\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5"+
-		"\4\27\n\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4"+
-		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4\61\n\4\f\4\16\4\64\13\4\3\4\2"+
-		"\5\2\4\6\2\7\4\2\6\6\23\23\4\2\5\5\21\21\4\2\4\4\6\6\6\2\t\t\13\13\17"+
-		"\17\22\22\4\2\n\n\20\20<\2\b\3\2\2\2\4\13\3\2\2\2\6\26\3\2\2\2\b\t\5\4"+
-		"\3\2\t\n\7\2\2\3\n\3\3\2\2\2\13\f\5\6\4\2\f\5\3\2\2\2\r\16\b\4\1\2\16"+
-		"\17\t\2\2\2\17\27\5\6\4\2\20\21\7\b\2\2\21\22\5\6\4\2\22\23\7\3\2\2\23"+
-		"\27\3\2\2\2\24\27\7\24\2\2\25\27\7\25\2\2\26\r\3\2\2\2\26\20\3\2\2\2\26"+
-		"\24\3\2\2\2\26\25\3\2\2\2\27\62\3\2\2\2\30\31\6\4\2\3\31\32\t\3\2\2\32"+
-		"\61\5\6\4\2\33\34\6\4\3\3\34\35\t\4\2\2\35\61\5\6\4\2\36\37\6\4\4\3\37"+
-		" \t\5\2\2 \61\5\6\4\2!\"\6\4\5\3\"#\t\6\2\2#\61\5\6\4\2$%\6\4\6\3%&\7"+
-		"\f\2\2&\61\5\6\4\2\'(\6\4\7\3()\7\16\2\2)\61\5\6\4\2*+\6\4\b\3+,\7\r\2"+
-		"\2,-\5\6\4\2-.\7\7\2\2./\5\6\4\2/\61\3\2\2\2\60\30\3\2\2\2\60\33\3\2\2"+
-		"\2\60\36\3\2\2\2\60!\3\2\2\2\60$\3\2\2\2\60\'\3\2\2\2\60*\3\2\2\2\61\64"+
-		"\3\2\2\2\62\60\3\2\2\2\62\63\3\2\2\2\63\7\3\2\2\2\64\62\3\2\2\2\5\26\60"+
-		"\62";
+		"\3\uacf5\uee8c\u4f5d\u8b0d\u4a45\u78bd\u1b2f\u3378\3\30G\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2\3\3\7\3\21\n\3\f\3\16\3\24\13\3"+
+		"\3\3\3\3\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5&"+
+		"\n\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3"+
+		"\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\7\5@\n\5\f\5\16\5C\13\5\3\6\3\6\3\6\2\7"+
+		"\2\4\6\b\n\2\7\4\2\6\6\24\24\4\2\5\5\22\22\4\2\4\4\6\6\6\2\t\t\f\f\20"+
+		"\20\23\23\4\2\13\13\21\21M\2\f\3\2\2\2\4\22\3\2\2\2\6\27\3\2\2\2\b%\3"+
+		"\2\2\2\nD\3\2\2\2\f\r\5\4\3\2\r\16\7\2\2\3\16\3\3\2\2\2\17\21\5\6\4\2"+
+		"\20\17\3\2\2\2\21\24\3\2\2\2\22\20\3\2\2\2\22\23\3\2\2\2\23\25\3\2\2\2"+
+		"\24\22\3\2\2\2\25\26\5\b\5\2\26\5\3\2\2\2\27\30\5\n\6\2\30\31\7\n\2\2"+
+		"\31\32\5\b\5\2\32\7\3\2\2\2\33\34\b\5\1\2\34\35\t\2\2\2\35&\5\b\5\2\36"+
+		"\37\7\b\2\2\37 \5\b\5\2 !\7\3\2\2!&\3\2\2\2\"&\7\26\2\2#&\7\27\2\2$&\7"+
+		"\25\2\2%\33\3\2\2\2%\36\3\2\2\2%\"\3\2\2\2%#\3\2\2\2%$\3\2\2\2&A\3\2\2"+
+		"\2\'(\6\5\2\3()\t\3\2\2)@\5\b\5\2*+\6\5\3\3+,\t\4\2\2,@\5\b\5\2-.\6\5"+
+		"\4\3./\t\5\2\2/@\5\b\5\2\60\61\6\5\5\3\61\62\t\6\2\2\62@\5\b\5\2\63\64"+
+		"\6\5\6\3\64\65\7\r\2\2\65@\5\b\5\2\66\67\6\5\7\3\678\7\17\2\28@\5\b\5"+
+		"\29:\6\5\b\3:;\7\16\2\2;<\5\b\5\2<=\7\7\2\2=>\5\b\5\2>@\3\2\2\2?\'\3\2"+
+		"\2\2?*\3\2\2\2?-\3\2\2\2?\60\3\2\2\2?\63\3\2\2\2?\66\3\2\2\2?9\3\2\2\2"+
+		"@C\3\2\2\2A?\3\2\2\2AB\3\2\2\2B\t\3\2\2\2CA\3\2\2\2DE\7\25\2\2E\13\3\2"+
+		"\2\2\6\22%?A";
 	public static final ATN _ATN =
 		ATNSimulator.deserialize(_serializedATN.toCharArray());
 	static {
