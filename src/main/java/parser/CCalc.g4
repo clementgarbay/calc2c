@@ -6,17 +6,17 @@ program  : body EOF
          ;
 body     : expression
          ;
-expression : ('-' | '!') expression                                 # UnaExp
-           | expression ('*' | '/') expression                      # BinExp
-           | expression ('+' | '-') expression                      # BinExp
-           | expression ('<' | '>' | '<=' | '>=') expression        # BinExp
-           | expression ('==' | '!=') expression                    # BinExp
-           | expression ('&&') expression                           # BinExp
-           | expression ('||') expression                           # BinExp
-           | expression '?'<assoc=right> expression ':' expression  # CondExp
-           | '(' expression ')'                                     # ParExp
-           | INTLIT                                                 # IntLit
-           | BOOLIT                                                 # BooLit
+expression : ('-' | '!') expression                                 # UnaryExpression
+           | expression ('*' | '/') expression                      # BinaryExpression
+           | expression ('+' | '-') expression                      # BinaryExpression
+           | expression ('<' | '>' | '<=' | '>=') expression        # BinaryExpression
+           | expression ('==' | '!=') expression                    # BinaryExpression
+           | expression ('&&') expression                           # BinaryExpression
+           | expression ('||') expression                           # BinaryExpression
+           | expression '?'<assoc=right> expression ':' expression  # ConditionalExpression
+           | '(' expression ')'                                     # ParenthesizedExpression
+           | INTLIT                                                 # IntegerExpression
+           | BOOLIT                                                 # BooleanExpression
            ;
            
 

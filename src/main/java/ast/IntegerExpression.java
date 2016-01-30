@@ -1,15 +1,12 @@
 package ast;
 
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Stream;
 
 /**
  * @author Clément Garbay
  */
-public class IntLit extends PrimitiveType {
+public class IntegerExpression extends PrimitiveType {
 	private Integer value;
     private final Set<Operator> acceptedOperators = new HashSet<Operator>() {
         {
@@ -20,7 +17,7 @@ public class IntLit extends PrimitiveType {
         }
     };
 
-	public IntLit(Integer value) {
+	public IntegerExpression(Integer value) {
         this.value = value;
 	}
 
@@ -41,9 +38,9 @@ public class IntLit extends PrimitiveType {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof IntLit)) return false;
-		IntLit intLit = (IntLit) obj;
-		return this.value.equals(intLit.value);
+		if (!(obj instanceof IntegerExpression)) return false;
+		IntegerExpression integerExpression = (IntegerExpression) obj;
+		return this.value.equals(integerExpression.value);
 	}
 
     @Override

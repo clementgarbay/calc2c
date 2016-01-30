@@ -12,18 +12,11 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link CCalcParser#CondExp}.
+	 * Visit a parse tree produced by {@link CCalcParser#BinaryExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCondExp(@NotNull CCalcParser.CondExpContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link CCalcParser#BooLit}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBooLit(@NotNull CCalcParser.BooLitContext ctx);
+	T visitBinaryExpression(@NotNull CCalcParser.BinaryExpressionContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link CCalcParser#body}.
@@ -33,13 +26,6 @@ public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
 	T visitBody(@NotNull CCalcParser.BodyContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link CCalcParser#BinExp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBinExp(@NotNull CCalcParser.BinExpContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link CCalcParser#program}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -47,23 +33,37 @@ public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
 	T visitProgram(@NotNull CCalcParser.ProgramContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link CCalcParser#IntLit}.
+	 * Visit a parse tree produced by {@link CCalcParser#BooleanExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIntLit(@NotNull CCalcParser.IntLitContext ctx);
+	T visitBooleanExpression(@NotNull CCalcParser.BooleanExpressionContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link CCalcParser#UnaExp}.
+	 * Visit a parse tree produced by {@link CCalcParser#ParenthesizedExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnaExp(@NotNull CCalcParser.UnaExpContext ctx);
+	T visitParenthesizedExpression(@NotNull CCalcParser.ParenthesizedExpressionContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link CCalcParser#ParExp}.
+	 * Visit a parse tree produced by {@link CCalcParser#IntegerExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParExp(@NotNull CCalcParser.ParExpContext ctx);
+	T visitIntegerExpression(@NotNull CCalcParser.IntegerExpressionContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CCalcParser#UnaryExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnaryExpression(@NotNull CCalcParser.UnaryExpressionContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CCalcParser#ConditionalExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConditionalExpression(@NotNull CCalcParser.ConditionalExpressionContext ctx);
 }

@@ -3,12 +3,12 @@ package ast;
 /**
  * @author Clément Garbay
  */
-public class UnaExp extends Expression {
+public class UnaryExpression extends Expression {
 
     public UnaryOperator operator;
     public Expression expression;
 
-    public UnaExp(UnaryOperator operator, Expression expression) {
+    public UnaryExpression(UnaryOperator operator, Expression expression) {
         this.operator = operator;
         this.expression = expression;
     }
@@ -25,8 +25,8 @@ public class UnaExp extends Expression {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof ParExp)) return false;
-        UnaExp unaExp = (UnaExp) obj;
-        return this.operator.equals(unaExp.operator) && this.expression.equals(unaExp.expression);
+        if (!(obj instanceof ParenthesizedExpression)) return false;
+        UnaryExpression unaryExpression = (UnaryExpression) obj;
+        return this.operator.equals(unaryExpression.operator) && this.expression.equals(unaryExpression.expression);
     }
 }

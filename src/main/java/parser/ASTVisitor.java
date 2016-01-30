@@ -21,36 +21,36 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
 		return new Body(expr); 
 	}
 
-	public AST visitIntLit(CCalcParser.IntLitContext ctx) {
-        return new IntLit(Integer.parseInt(ctx.getText()));
+	public AST visitIntegerExpression(CCalcParser.IntegerExpressionContext ctx) {
+        return new IntegerExpression(Integer.parseInt(ctx.getText()));
 	}
 
-    public AST visitBooLit(CCalcParser.BooLitContext ctx) {
-        return new BooLit(Boolean.parseBoolean(ctx.getText()));
+    public AST visitBooleanExpression(CCalcParser.BooleanExpressionContext ctx) {
+        return new BooleanExpression(Boolean.parseBoolean(ctx.getText()));
     }
 
-	public AST visitParExp(CCalcParser.ParExpContext ctx) {
+	public AST visitParenthesizedExpression(CCalcParser.ParenthesizedExpressionContext ctx) {
 		Expression expr = (Expression)visit(ctx.expression());
-		return new ParExp(expr);
+		return new ParenthesizedExpression(expr);
 	}
 
-    public AST visitBinExp(CCalcParser.BinExpContext ctx) {
+    public AST visitBinaryExpression(CCalcParser.BinaryExpressionContext ctx) {
         Expression expr1 = (Expression)visit(ctx.getChild(0));
         Expression expr2 = (Expression)visit(ctx.getChild(2));
         BinaryOperator operator = BinaryOperator.fromString(ctx.getChild(1).getText());
-        return new BinExp(operator, expr1, expr2);
+        return new BinaryExpression(operator, expr1, expr2);
     }
 
-    public AST visitUnaExp(CCalcParser.UnaExpContext ctx) {
+    public AST visitUnaryExpression(CCalcParser.UnaryExpressionContext ctx) {
         UnaryOperator operator = UnaryOperator.fromString(ctx.getChild(0).getText());
         Expression expr = (Expression)visit(ctx.getChild(1));
-        return new UnaExp(operator, expr);
+        return new UnaryExpression(operator, expr);
     }
 
-    public AST visitCondExp(CCalcParser.CondExpContext ctx) {
+    public AST visitConditionalExpression(CCalcParser.ConditionalExpressionContext ctx) {
         Expression expr1 = (Expression)visit(ctx.getChild(0));
         Expression expr2 = (Expression)visit(ctx.getChild(2));
         Expression expr3 = (Expression)visit(ctx.getChild(4));
-        return new CondExp(expr1, expr2, expr3);
+        return new ConditionalExpression(expr1, expr2, expr3);
     }
 }

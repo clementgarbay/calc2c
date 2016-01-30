@@ -8,13 +8,13 @@ import java.lang.reflect.Method;
 /**
  * @author Clément Garbay
  */
-public class BinExp extends Expression {
+public class BinaryExpression extends Expression {
 
     public Expression expr1;
     public Expression expr2;
     public BinaryOperator operator;
 
-    public BinExp(BinaryOperator operator, Expression expr1, Expression expr2) {
+    public BinaryExpression(BinaryOperator operator, Expression expr1, Expression expr2) {
         this.operator = operator;
         this.expr1 = expr1;
         this.expr2 = expr2;
@@ -33,7 +33,7 @@ public class BinExp extends Expression {
         // Type checking
         if (this.expr1.getFinalType() != this.expr2.getFinalType()) throw new IncompatibleTypeException();
         // Division by 0
-        if (this.operator.equals(BinaryOperator.DIVIDE) && this.expr2.equals(new IntLit(0))) throw new ArithmeticException("Division by 0");
+        if (this.operator.equals(BinaryOperator.DIVIDE) && this.expr2.equals(new IntegerExpression(0))) throw new ArithmeticException("Division by 0");
         // Operator acceptance
         boolean operatorAccepted = true;
         try {
@@ -49,8 +49,8 @@ public class BinExp extends Expression {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof BinExp)) return false;
-        BinExp binExp = (BinExp) obj;
-        return this.expr1.equals(binExp.expr1) && this.expr2.equals(binExp.expr2) && this.operator.equals(binExp.operator);
+        if (!(obj instanceof BinaryExpression)) return false;
+        BinaryExpression binaryExpression = (BinaryExpression) obj;
+        return this.expr1.equals(binaryExpression.expr1) && this.expr2.equals(binaryExpression.expr2) && this.operator.equals(binaryExpression.operator);
     }
 }

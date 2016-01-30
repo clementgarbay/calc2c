@@ -3,10 +3,10 @@ package ast;
 /**
  * @author Clément Garbay
  */
-public class ParExp extends Expression {
+public class ParenthesizedExpression extends Expression {
     public Expression expression;
 
-    public ParExp(Expression expression) {
+    public ParenthesizedExpression(Expression expression) {
         this.expression = expression;
     }
 
@@ -22,8 +22,8 @@ public class ParExp extends Expression {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof ParExp)) return false;
-        ParExp parExp = (ParExp) obj;
-        return this.expression.equals(parExp.expression);
+        if (!(obj instanceof ParenthesizedExpression)) return false;
+        ParenthesizedExpression parenthesizedExpression = (ParenthesizedExpression) obj;
+        return this.expression.equals(parenthesizedExpression.expression);
     }
 }

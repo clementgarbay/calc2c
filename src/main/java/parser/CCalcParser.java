@@ -132,71 +132,71 @@ public class CCalcParser extends Parser {
 			this._p = ctx._p;
 		}
 	}
-	public static class BooLitContext extends ExpressionContext {
+	public static class BinaryExpressionContext extends ExpressionContext {
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
+		}
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
+		}
+		public BinaryExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitBinaryExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ParenthesizedExpressionContext extends ExpressionContext {
+		public ExpressionContext expression() {
+			return getRuleContext(ExpressionContext.class,0);
+		}
+		public ParenthesizedExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitParenthesizedExpression(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class BooleanExpressionContext extends ExpressionContext {
 		public TerminalNode BOOLIT() { return getToken(CCalcParser.BOOLIT, 0); }
-		public BooLitContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public BooleanExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitBooLit(this);
+			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitBooleanExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class CondExpContext extends ExpressionContext {
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
-		}
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
-		}
-		public CondExpContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitCondExp(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class BinExpContext extends ExpressionContext {
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
-		}
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
-		}
-		public BinExpContext(ExpressionContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitBinExp(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class IntLitContext extends ExpressionContext {
+	public static class IntegerExpressionContext extends ExpressionContext {
 		public TerminalNode INTLIT() { return getToken(CCalcParser.INTLIT, 0); }
-		public IntLitContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public IntegerExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitIntLit(this);
+			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitIntegerExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class UnaExpContext extends ExpressionContext {
+	public static class UnaryExpressionContext extends ExpressionContext {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public UnaExpContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public UnaryExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitUnaExp(this);
+			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitUnaryExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class ParExpContext extends ExpressionContext {
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
+	public static class ConditionalExpressionContext extends ExpressionContext {
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
 		}
-		public ParExpContext(ExpressionContext ctx) { copyFrom(ctx); }
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
+		}
+		public ConditionalExpressionContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitParExp(this);
+			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitConditionalExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -218,7 +218,7 @@ public class CCalcParser extends Parser {
 			case 4:
 			case 17:
 				{
-				_localctx = new UnaExpContext(_localctx);
+				_localctx = new UnaryExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
@@ -233,7 +233,7 @@ public class CCalcParser extends Parser {
 				break;
 			case 6:
 				{
-				_localctx = new ParExpContext(_localctx);
+				_localctx = new ParenthesizedExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(14); match(6);
@@ -243,7 +243,7 @@ public class CCalcParser extends Parser {
 				break;
 			case INTLIT:
 				{
-				_localctx = new IntLitContext(_localctx);
+				_localctx = new IntegerExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(18); match(INTLIT);
@@ -251,7 +251,7 @@ public class CCalcParser extends Parser {
 				break;
 			case BOOLIT:
 				{
-				_localctx = new BooLitContext(_localctx);
+				_localctx = new BooleanExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(19); match(BOOLIT);
@@ -273,7 +273,7 @@ public class CCalcParser extends Parser {
 					switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
 					case 1:
 						{
-						_localctx = new BinExpContext(new ExpressionContext(_parentctx, _parentState, _p));
+						_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(22);
 						if (!(10 >= _localctx._p)) throw new FailedPredicateException(this, "10 >= $_p");
@@ -289,7 +289,7 @@ public class CCalcParser extends Parser {
 
 					case 2:
 						{
-						_localctx = new BinExpContext(new ExpressionContext(_parentctx, _parentState, _p));
+						_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(25);
 						if (!(9 >= _localctx._p)) throw new FailedPredicateException(this, "9 >= $_p");
@@ -305,7 +305,7 @@ public class CCalcParser extends Parser {
 
 					case 3:
 						{
-						_localctx = new BinExpContext(new ExpressionContext(_parentctx, _parentState, _p));
+						_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(28);
 						if (!(8 >= _localctx._p)) throw new FailedPredicateException(this, "8 >= $_p");
@@ -321,7 +321,7 @@ public class CCalcParser extends Parser {
 
 					case 4:
 						{
-						_localctx = new BinExpContext(new ExpressionContext(_parentctx, _parentState, _p));
+						_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(31);
 						if (!(7 >= _localctx._p)) throw new FailedPredicateException(this, "7 >= $_p");
@@ -337,7 +337,7 @@ public class CCalcParser extends Parser {
 
 					case 5:
 						{
-						_localctx = new BinExpContext(new ExpressionContext(_parentctx, _parentState, _p));
+						_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(34);
 						if (!(6 >= _localctx._p)) throw new FailedPredicateException(this, "6 >= $_p");
@@ -350,7 +350,7 @@ public class CCalcParser extends Parser {
 
 					case 6:
 						{
-						_localctx = new BinExpContext(new ExpressionContext(_parentctx, _parentState, _p));
+						_localctx = new BinaryExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(37);
 						if (!(5 >= _localctx._p)) throw new FailedPredicateException(this, "5 >= $_p");
@@ -363,7 +363,7 @@ public class CCalcParser extends Parser {
 
 					case 7:
 						{
-						_localctx = new CondExpContext(new ExpressionContext(_parentctx, _parentState, _p));
+						_localctx = new ConditionalExpressionContext(new ExpressionContext(_parentctx, _parentState, _p));
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(40);
 						if (!(4 >= _localctx._p)) throw new FailedPredicateException(this, "4 >= $_p");

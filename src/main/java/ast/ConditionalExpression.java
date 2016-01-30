@@ -5,13 +5,13 @@ import error.IncompatibleTypeException;
 /**
  * @author Clément Garbay
  */
-public class CondExp extends Expression {
+public class ConditionalExpression extends Expression {
 
     public Expression expr1;
     public Expression expr2;
     public Expression expr3;
 
-    public CondExp(Expression expr1, Expression expr2, Expression expr3) {
+    public ConditionalExpression(Expression expr1, Expression expr2, Expression expr3) {
         this.expr1 = expr1;
         this.expr2 = expr2;
         this.expr3 = expr3;
@@ -32,8 +32,8 @@ public class CondExp extends Expression {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof CondExp)) return false;
-        CondExp condExp = (CondExp) obj;
-        return this.expr1.equals(condExp.expr1) && this.expr2.equals(condExp.expr2) && this.expr3.equals(condExp.expr3);
+        if (!(obj instanceof ConditionalExpression)) return false;
+        ConditionalExpression conditionalExpression = (ConditionalExpression) obj;
+        return this.expr1.equals(conditionalExpression.expr1) && this.expr2.equals(conditionalExpression.expr2) && this.expr3.equals(conditionalExpression.expr3);
     }
 }

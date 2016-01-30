@@ -9,7 +9,7 @@ public class TestGreen extends Test {
 	public static void main(String[] args){
 		boolean verbose = true;
 
-        /*/*test(verbose, PATH + "green1.calc", "number", "1234567890");
+        test(verbose, PATH + "green1.calc", "number", "1234567890");
         test(verbose, PATH + "green2.calc", "addition", "2");
 		test(verbose, PATH + "green3.calc", "arithmetic expression with priority", "7");
 		test(verbose, PATH + "green4.calc", "unary minus", "-4");
@@ -33,9 +33,9 @@ public class TestGreen extends Test {
 		test(verbose, PATH + "green22.calc", "garbage", "error");
 		test(verbose, PATH + "green23.calc", "erroneous conditional", "error");
 		test(verbose, PATH + "green24.calc", "erroneous conditional/garbage", "error");
-		test(verbose, PATH + "green25.calc", "division by zero", "error");*/
+		test(verbose, PATH + "green25.calc", "division by zero", "error");
 		test(verbose, PATH + "green26.calc", "division by zero", "error");
-//		test(verbose, PATH + "green27.calc", "erroneous number", "error");
+		test(verbose, PATH + "green27.calc", "erroneous number", "error");
 
 		report();
 	}

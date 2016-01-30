@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * @author Clément Garbay
  */
-public class BooLit extends PrimitiveType {
+public class BooleanExpression extends PrimitiveType {
     private Boolean value;
     private final Set<Operator> acceptedOperators = new HashSet<Operator>() {
         {
@@ -16,7 +16,7 @@ public class BooLit extends PrimitiveType {
         }
     };
 
-    public BooLit(Boolean value) {
+    public BooleanExpression(Boolean value) {
         this.value = value;
     }
 
@@ -37,9 +37,9 @@ public class BooLit extends PrimitiveType {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof BooLit)) return false;
-        BooLit booLit = (BooLit) obj;
-        return this.value.equals(booLit.value);
+        if (!(obj instanceof BooleanExpression)) return false;
+        BooleanExpression booleanExpression = (BooleanExpression) obj;
+        return this.value.equals(booleanExpression.value);
     }
 
     @Override
