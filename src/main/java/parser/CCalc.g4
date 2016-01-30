@@ -17,8 +17,8 @@ expression  : ('-' | '!') expression                                 # UnaryExpr
             | expression ('||') expression                           # BinaryExpression
             | expression '?'<assoc=right> expression ':' expression  # ConditionalExpression
             | '(' expression ')'                                     # ParenthesizedExpression
+            | ('true' | 'false')                                     # BooleanType
             | INT                                                    # IntegerType
-            | BOOL                                                   # BooleanType
             | IDENTIFIER                                             # StringType
             ;  
 variable    : IDENTIFIER
@@ -29,8 +29,6 @@ variable    : IDENTIFIER
 IDENTIFIER  : ('a'..'z')('a'..'z' | '0'..'9')*
             ;
 INT         : '0' | ('1'..'9')('0'..'9')*
-            ;
-BOOL        : 'true' | 'false'
             ;
 WS          : ('\t' | '\n' | '\r' | ' ') -> skip
             ;

@@ -2,6 +2,5 @@
 #include <stdbool.h> 
 
 int main() {
-    INTEGER a = 34;
-    return printf("%i\n", a);
+    return printf("%i\n", ! false && true);
 }
