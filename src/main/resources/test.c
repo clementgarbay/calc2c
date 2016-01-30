@@ -2,5 +2,5 @@
 #include <stdbool.h> 
 
 int main() {
-    return printf("%i\n", - 2 -( - 4));
+    return printf("%i\n", true + false);
 }

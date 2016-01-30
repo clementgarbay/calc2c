@@ -1,5 +1,8 @@
 package ast;
 
+/**
+ * @author Clément Garbay
+ */
 public class Program extends AST {
 	public Body body;
 

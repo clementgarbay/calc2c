@@ -3,6 +3,9 @@ package ast;
 import java.lang.reflect.Field;
 import java.util.stream.IntStream;
 
+/**
+ * @author Clément Garbay
+ */
 public abstract class AST {
 
     public abstract String gen(int padding);

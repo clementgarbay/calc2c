@@ -1,5 +1,8 @@
 package ast;
 
+/**
+ * @author Clément Garbay
+ */
 public class Body extends AST {
 	public Expression expr;
 
@@ -19,6 +22,4 @@ public class Body extends AST {
 		stringBuilder.append("\n}");
 		return stringBuilder.toString();
 	}
-
-
 }

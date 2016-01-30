@@ -3,9 +3,9 @@ package ast;
 import java.util.Arrays;
 
 /**
- * Created by clementgarbay on 25/01/2016.
+ * @author Clément Garbay
  */
-public enum UnaryOperator {
+public enum UnaryOperator implements Operator {
     MINUS ("-"),
     EXCLAMATION ("!");
 

@@ -1,7 +1,7 @@
 package ast;
 
 /**
- * Created by clementgarbay on 25/01/2016.
+ * @author Clément Garbay
  */
 public class ParExp extends Expression {
     public Expression expression;
@@ -11,7 +11,19 @@ public class ParExp extends Expression {
     }
 
     @Override
+    public Class<? extends PrimitiveType> getFinalType() {
+        return this.expression.getFinalType();
+    }
+
+    @Override
     public String gen(int padding) {
         return '(' + expression.gen(padding) + ')';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ParExp)) return false;
+        ParExp parExp = (ParExp) obj;
+        return this.expression.equals(parExp.expression);
     }
 }

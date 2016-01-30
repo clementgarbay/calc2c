@@ -1,7 +1,9 @@
 package ast;
 
+import error.IncompatibleTypeException;
+
 /**
- * Created by clementgarbay on 25/01/2016.
+ * @author Clément Garbay
  */
 public class CondExp extends Expression {
 
@@ -16,8 +18,22 @@ public class CondExp extends Expression {
     }
 
     @Override
+    public Class<? extends PrimitiveType> getFinalType() {
+        // Type checking
+        if (this.expr2.getFinalType() != this.expr3.getFinalType()) throw new IncompatibleTypeException();
+
+        return this.expr2.getFinalType();
+    }
+
+    @Override
     public String gen(int padding) {
-        // return this.paddingToSpace(padding) + "if (" + this.expr1.gen(0) + ") {\n" + this.expr2.gen(padding + 4) + "\n} else {\n" + this.expr3.gen(padding + 4) + "\n}";
         return this.paddingToSpace(padding) + this.expr1.gen(0) + " ? " + this.expr2.gen(0) + " : " + this.expr3.gen(0);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof CondExp)) return false;
+        CondExp condExp = (CondExp) obj;
+        return this.expr1.equals(condExp.expr1) && this.expr2.equals(condExp.expr2) && this.expr3.equals(condExp.expr3);
     }
 }
