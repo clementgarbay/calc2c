@@ -20,5 +20,5 @@ public abstract class Expression extends AST {
      *
      * @param definitions
      */
-    public abstract void checkExpressionErrors(List<Definition> definitions);
+    public abstract void checkExpressionErrors(List<Definition> definitions); // List<VariableName> knownParameterVariables
 }

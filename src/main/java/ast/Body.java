@@ -36,6 +36,7 @@ public class Body extends AST {
         // Check immutable definitions
         final List<String> duplicatedVariables = new ArrayList<>();
         Set<String> set = new HashSet<String>() {
+            @Override
             public boolean add(String variableName) {
                 if (contains(variableName)) {
                     duplicatedVariables.add(variableName);

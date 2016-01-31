@@ -2,7 +2,7 @@
 #include <stdbool.h> 
 
 int test(x, y) {
-    return x + 3;
+    return x + b;
 }
 
 int main() {

@@ -23,7 +23,7 @@ public class FunctionCall extends Expression {
 
     @Override
     public void checkExpressionErrors(List<Definition> definitions) {
-
+        this.parameters.stream().forEach(parameters -> parameters.checkExpressionErrors(definitions));
     }
 
     @Override

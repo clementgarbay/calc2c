@@ -29,7 +29,7 @@ public class TestSyntax {
 	public static void main(String[] args) {
         final String PATH = "src/test/resources/";
 
-        test(PATH + "green1.calc", true);
+        /*test(PATH + "green1.calc", true);
 		test(PATH + "green2.calc", true);
 		test(PATH + "green3.calc", true);
 		test(PATH + "green4.calc", true);
@@ -54,24 +54,24 @@ public class TestSyntax {
 		test(PATH + "green24.calc", false);
 		test(PATH + "green25.calc", true);
 		test(PATH + "green26.calc", true);
-		test(PATH + "green27.calc", false);
+		test(PATH + "green27.calc", false);*/
 		
-		test(PATH + "blue1.calc", true);
-		test(PATH + "blue2.calc", true);
-		test(PATH + "blue3.calc", true);
-		test(PATH + "blue4.calc", true);
+//		test(PATH + "blue1.calc", true);
+//		test(PATH + "blue2.calc", true);
+//		test(PATH + "blue3.calc", true);
+//		test(PATH + "blue4.calc", true);
 		test(PATH + "blue5.calc", true);
 		test(PATH + "blue6.calc", true);
 		test(PATH + "blue7.calc", true);
-		test(PATH + "blue8.calc", false);
+//		test(PATH + "blue8.calc", false);
 		
-		test(PATH + "red1.calc", true);
-		test(PATH + "red2.calc", true);
-		test(PATH + "red3.calc", true);
-		test(PATH + "red4.calc", true);
-		test(PATH + "red5.calc", true);
-		test(PATH + "red6.calc", true);
-		test(PATH + "red10.calc", true);
+//		test(PATH + "red1.calc", true);
+//		test(PATH + "red2.calc", true);
+//		test(PATH + "red3.calc", true);
+//		test(PATH + "red4.calc", true);
+//		test(PATH + "red5.calc", true);
+//		test(PATH + "red6.calc", true);
+//		test(PATH + "red10.calc", true);
 
 		report();
 	}

@@ -23,7 +23,7 @@ public class VariableCall extends Expression {
             }
         }
 
-        throw new UndefinedVariableException();
+        throw new UndefinedVariableException("Variable " + variableName + " is undefined.");
     }
 
     @Override

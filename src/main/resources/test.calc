@@ -1,2 +1,2 @@
-test(x,y) x + 3
+test(x,y) x + b
 test(10,0)
