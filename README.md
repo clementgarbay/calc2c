@@ -7,7 +7,7 @@ Tous les tests passent sauf 1 test de la piste verte (le numéro 26) : `1 / (1 -
 
 ## Vérification d'erreurs pré-compilation en C
 
-Différentes possibles erreurs sont testées avant la génération en code C. Parmi elles : vérification de types, vérification de l'existence de variable, vérification de la cohérence des opérateurs, vérification des problèmes d'immuabilités, etc.
+Différentes possibles erreurs sont testées avant la génération en code C. Parmi elles : vérification de types, vérification de l'existence de variable, vérification de la cohérence des opérateurs, vérification des problèmes d'immuabilités, vérification arithmétique, etc.
 
 ### Type checking
 
