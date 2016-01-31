@@ -17,7 +17,7 @@ public class FunctionName extends AST {
 
     @Override
     public String gen(int padding) {
-        return this.paddingToSpace(padding) + this.name + "()";
+        return this.paddingToSpace(padding) + this.name;
     }
 
     @Override

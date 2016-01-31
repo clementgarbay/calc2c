@@ -4,14 +4,13 @@ import ast.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ASTVisitor extends CCalcBaseVisitor<AST> {
 	public AST visitProgram(CCalcParser.ProgramContext ctx) {
         // retrieve ASTs for functions
         List<CCalcParser.FunctionContext> functionCtxs = ctx.function();
-        List<Function> functions = new ArrayList<>();
-        for (CCalcParser.FunctionContext functionCtx : functionCtxs)
-          functions.add((Function)visit(functionCtx));
+        List<Function> functions = functionCtxs.stream().map(functionCtx -> (Function) visit(functionCtx)).collect(Collectors.toList());
         // retrieve AST for body
         Body body = (Body)visit(ctx.body());
         // return AST for program
@@ -25,13 +24,19 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
     }
 
     public AST visitHead(CCalcParser.HeadContext ctx) {
-        FunctionName functionName = (FunctionName)visit(ctx.getChild(0));
-        return new Head(functionName);
+        FunctionName functionName = (FunctionName)visit(ctx.functionName());
+
+        List<VariableName> parameters = new ArrayList<>();
+        ctx.variableName()
+                .stream()
+                .forEach(var -> parameters.add((VariableName) visit(var)));
+
+        return new Head(functionName, parameters);
     }
+
 
 	public AST visitBody(CCalcParser.BodyContext ctx) {
         List<Definition> definitions = new ArrayList<>();
-
         ctx.definition()
                 .stream()
                 .forEach(def -> definitions.add((Definition) visit(def)));
@@ -93,6 +98,12 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
     }
 
     public AST visitFunctionCall(CCalcParser.FunctionCallContext ctx) {
-        return new FunctionCall(ctx.getChild(0).getText());
+        FunctionName functionName = (FunctionName) visit(ctx.functionName());
+        List<Expression> parameters = new ArrayList<>();
+        ctx.expression()
+                .stream()
+                .forEach(expr -> parameters.add((Expression) visit(expr)));
+
+        return new FunctionCall(functionName, parameters);
     }
 }
