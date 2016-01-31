@@ -27,7 +27,7 @@ public class VariableCall extends Expression {
     }
 
     @Override
-    public void checkExpression(List<Definition> definitions) {
+    public void checkExpressionErrors(List<Definition> definitions) {
         // Variable existence
         this.getFinalType(definitions);
     }

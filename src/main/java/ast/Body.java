@@ -22,16 +22,16 @@ public class Body extends AST {
     /**
      * Magic method to find all the possible errors (type, undefined variable, arithmetic, operator acceptance, immutability problems, ...).
      */
-    public void checkExpressions() {
-        // Check expressions in definitions
+    public void errorsControl() {
+        // Check expressions errors in definitions
         List<Definition> definitionsProcessed = new ArrayList<>();
         for (Definition definition: this.definitions) {
             definitionsProcessed.add(definition);
-            definition.getExpression().checkExpression(definitionsProcessed);
+            definition.getExpression().checkExpressionErrors(definitionsProcessed);
         }
 
-        // Check body expression
-        this.expression.checkExpression(this.definitions);
+        // Check body expression errors
+        this.expression.checkExpressionErrors(this.definitions);
 
         // Check immutable definitions
         final List<String> duplicatedVariables = new ArrayList<>();
@@ -56,7 +56,7 @@ public class Body extends AST {
 
     public String genMain() {
 
-        this.checkExpressions();
+        this.errorsControl();
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\nint main() {\n");

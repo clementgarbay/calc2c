@@ -29,7 +29,7 @@ public class BinaryExpression extends Expression {
     }
 
     @Override
-    public void checkExpression(List<Definition> definitions) {
+    public void checkExpressionErrors(List<Definition> definitions) {
         // Type checking
         if (this.expr1.getFinalType(definitions) != this.expr2.getFinalType(definitions)) throw new IncompatibleTypeException();
         // Operator acceptance
@@ -37,8 +37,8 @@ public class BinaryExpression extends Expression {
         // Division by 0
         if (this.operator.equals(BinaryOperator.DIVIDE) && this.expr2.equals(new IntegerType(0))) throw new ArithmeticException("Division by 0");
 
-        this.expr1.checkExpression(definitions);
-        this.expr2.checkExpression(definitions);
+        this.expr1.checkExpressionErrors(definitions);
+        this.expr2.checkExpressionErrors(definitions);
     }
 
     @Override
