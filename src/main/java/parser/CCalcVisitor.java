@@ -68,11 +68,11 @@ public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
 	T visitConditionalExpression(@NotNull CCalcParser.ConditionalExpressionContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link CCalcParser#StringType}.
+	 * Visit a parse tree produced by {@link CCalcParser#VariableCall}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStringType(@NotNull CCalcParser.StringTypeContext ctx);
+	T visitVariableCall(@NotNull CCalcParser.VariableCallContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link CCalcParser#variable}.

@@ -82,7 +82,7 @@ public class CCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitStringType(@NotNull CCalcParser.StringTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitVariableCall(@NotNull CCalcParser.VariableCallContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}

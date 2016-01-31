@@ -21,10 +21,19 @@ public class ConditionalExpression extends Expression {
 
     @Override
     public Type getFinalType(List<Definition> definitions) {
-        if (this.expr1.getFinalType(definitions) != Type.BOOLEAN) throw new IncompatibleTypeException();
-        if (this.expr2.getFinalType(definitions) != this.expr3.getFinalType(definitions)) throw new IncompatibleTypeException();
-
         return this.expr2.getFinalType(definitions);
+    }
+
+    @Override
+    public void checkExpression(List<Definition> definitions) {
+        // Type checking
+        if (this.expr2.getFinalType(definitions) != this.expr3.getFinalType(definitions)) throw new IncompatibleTypeException();
+        // Condition must be boolean
+        if (this.expr1.getFinalType(definitions) != Type.BOOLEAN) throw new IncompatibleTypeException();
+
+        this.expr1.checkExpression(definitions);
+        this.expr2.checkExpression(definitions);
+        this.expr3.checkExpression(definitions);
     }
 
     @Override

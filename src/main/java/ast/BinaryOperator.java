@@ -56,14 +56,14 @@ public enum BinaryOperator implements Operator {
     }
 
     /**
-     * Checks if the operator is a boolean operator (equality, comparison or logical).
+     * Checks if the operator is a boolean binary operator (equality, comparison or logical).
      */
     public static boolean isBooleanOperator(Operator operator) {
         return getEqualityOperators().contains(operator) || getComparisonOperators().contains(operator) || getLogicalOperators().contains(operator);
     }
 
     /**
-     * Checks if the operator is an arithmetic operator.
+     * Checks if the operator is an arithmetic binary operator.
      */
     public static boolean isArithmeticOperator(Operator operator) {
         return getArithmeticOperators().contains(operator);

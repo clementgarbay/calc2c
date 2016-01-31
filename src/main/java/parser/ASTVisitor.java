@@ -49,8 +49,8 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
         return new BooleanType(Boolean.parseBoolean(ctx.getText()));
     }
 
-    public AST visitStringType(CCalcParser.StringTypeContext ctx) {
-        return new StringType(ctx.getText());
+    public AST visitVariableCall(CCalcParser.VariableCallContext ctx) {
+        return new VariableCall(ctx.getText());
     }
 
 	public AST visitParenthesizedExpression(CCalcParser.ParenthesizedExpressionContext ctx) {

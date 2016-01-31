@@ -1,5 +1,7 @@
 package ast;
 
+import error.IncompatibleOperatorException;
+
 import java.util.List;
 
 /**
@@ -18,6 +20,14 @@ public class UnaryExpression extends Expression {
     @Override
     public Type getFinalType(List<Definition> definitions) {
         return this.expression.getFinalType(definitions);
+    }
+
+    @Override
+    public void checkExpression(List<Definition> definitions) {
+        // Operator acceptance
+        if (!this.expression.getFinalType(definitions).acceptsOperator(this.operator)) throw new IncompatibleOperatorException();
+
+        this.expression.checkExpression(definitions);
     }
 
     @Override

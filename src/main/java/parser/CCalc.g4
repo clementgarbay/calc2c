@@ -17,9 +17,9 @@ expression  : ('-' | '!') expression                                 # UnaryExpr
             | expression ('||') expression                           # BinaryExpression
             | expression '?'<assoc=right> expression ':' expression  # ConditionalExpression
             | '(' expression ')'                                     # ParenthesizedExpression
+            | variable                                               # VariableCall
             | ('true' | 'false')                                     # BooleanType
             | INT                                                    # IntegerType
-            | IDENTIFIER                                             # StringType
             ;  
 variable    : IDENTIFIER
             ;

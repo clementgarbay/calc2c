@@ -14,15 +14,7 @@ public class StringType extends PrimitiveType<String> {
 
     @Override
     public Type getFinalType(List<Definition> definitions) {
-        Type finalType = Type.STRING;
-
-        for (Definition definition : definitions) {
-            if (definition.getVariable().getName().equals(this.value)) {
-                finalType = definition.getExpression().getFinalType(definitions);
-            }
-        }
-
-        return finalType;
+        return Type.STRING;
     }
 
     @Override

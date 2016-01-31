@@ -18,6 +18,11 @@ public class ParenthesizedExpression extends Expression {
     }
 
     @Override
+    public void checkExpression(List<Definition> definitions) {
+        this.expression.checkExpression(definitions);
+    }
+
+    @Override
     public String gen(int padding) {
         return '(' + expression.gen(padding) + ')';
     }

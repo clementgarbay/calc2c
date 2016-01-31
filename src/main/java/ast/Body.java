@@ -1,6 +1,11 @@
 package ast;
 
+import error.ImmutableException;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Clément Garbay
@@ -14,8 +19,34 @@ public class Body extends AST {
 		this.expression = expression;
 	}
 
-    public void checkImmutablility() {
-         // TODO
+    /**
+     * Magic method to find all the possible errors (type, undefined variable, arithmetic, operator acceptance, immutability problems, ...).
+     */
+    public void checkExpressions() {
+        // Check expressions in definitions
+        List<Definition> definitionsProcessed = new ArrayList<>();
+        for (Definition definition: this.definitions) {
+            definitionsProcessed.add(definition);
+            definition.getExpression().checkExpression(definitionsProcessed);
+        }
+
+        // Check body expression
+        this.expression.checkExpression(this.definitions);
+
+        // Check immutable definitions
+        final List<String> duplicatedVariables = new ArrayList<>();
+        Set<String> set = new HashSet<String>() {
+            public boolean add(String variableName) {
+                if (contains(variableName)) {
+                    duplicatedVariables.add(variableName);
+                }
+                return super.add(variableName);
+            }
+        };
+        this.definitions.stream().forEach(definition -> set.add(definition.getVariable().getName()));
+        if (duplicatedVariables.size() > 0) {
+            throw new ImmutableException("Variables " + duplicatedVariables.toString() + " are defined multiple times.");
+        }
     }
 
 	@Override
@@ -24,24 +55,27 @@ public class Body extends AST {
 	}
 
     public String genMain() {
-        StringBuilder stringBuilder = new StringBuilder();
 
+        this.checkExpressions();
+
+        StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\nint main() {\n");
 
         // Definitions
         this.definitions.stream().forEach(definition -> {
-            stringBuilder.append(paddingToSpace(4));
+            stringBuilder.append(super.paddingToSpace(4));
             stringBuilder.append(definition.getExpression().getFinalType(this.definitions).getTypeInC());
             stringBuilder.append(definition.gen(1));
         });
 
         // Final expression
-        stringBuilder.append(this.paddingToSpace(4)).append("return printf(\"%i\\n\", ").append(this.expression.gen(0)).append(");");
-
-        /*stringBuilder.append(this.paddingToSpace(4)).append("return printf(\"");
-        stringBuilder.append(((this.expression.getFinalType() == Type.INTEGER || this.expression.getFinalType() == Type.BOOLEAN) ? "%i" : "%s"));
-        stringBuilder.append("\\n\", ").append(this.expression.gen(0)).append(");");*/
-
+        stringBuilder.append(super.paddingToSpace(4));
+        if (this.expression.getFinalType(this.definitions) == Type.STRING) {
+            stringBuilder.append("return printf(\"%s\\n\", ");
+        } else {
+            stringBuilder.append("return printf(\"%i\\n\", ");
+        }
+        stringBuilder.append(this.expression.gen(0)).append(");");
         stringBuilder.append("\n}");
 
         return stringBuilder.toString();

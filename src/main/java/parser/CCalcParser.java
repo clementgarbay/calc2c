@@ -3,11 +3,8 @@ package parser;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class CCalcParser extends Parser {
@@ -240,12 +237,14 @@ public class CCalcParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class StringTypeContext extends ExpressionContext {
-		public TerminalNode IDENTIFIER() { return getToken(CCalcParser.IDENTIFIER, 0); }
-		public StringTypeContext(ExpressionContext ctx) { copyFrom(ctx); }
+	public static class VariableCallContext extends ExpressionContext {
+		public VariableContext variable() {
+			return getRuleContext(VariableContext.class,0);
+		}
+		public VariableCallContext(ExpressionContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitStringType(this);
+			if ( visitor instanceof CCalcVisitor ) return ((CCalcVisitor<? extends T>)visitor).visitVariableCall(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -312,13 +311,21 @@ public class CCalcParser extends Parser {
 				setState(30); match(1);
 				}
 				break;
+			case IDENTIFIER:
+				{
+				_localctx = new VariableCallContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(32); variable();
+				}
+				break;
 			case 9:
 			case 19:
 				{
 				_localctx = new BooleanTypeContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(32);
+				setState(33);
 				_la = _input.LA(1);
 				if ( !(_la==9 || _la==19) ) {
 				_errHandler.recoverInline(this);
@@ -331,15 +338,7 @@ public class CCalcParser extends Parser {
 				_localctx = new IntegerTypeContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(33); match(INT);
-				}
-				break;
-			case IDENTIFIER:
-				{
-				_localctx = new StringTypeContext(_localctx);
-				_ctx = _localctx;
-				_prevctx = _localctx;
-				setState(34); match(IDENTIFIER);
+				setState(34); match(INT);
 				}
 				break;
 			default:
@@ -548,15 +547,15 @@ public class CCalcParser extends Parser {
 		"\21\5\6\4\2\20\17\3\2\2\2\21\24\3\2\2\2\22\20\3\2\2\2\22\23\3\2\2\2\23"+
 		"\25\3\2\2\2\24\22\3\2\2\2\25\26\5\b\5\2\26\5\3\2\2\2\27\30\5\n\6\2\30"+
 		"\31\7\n\2\2\31\32\5\b\5\2\32\7\3\2\2\2\33\34\b\5\1\2\34\35\t\2\2\2\35"+
-		"&\5\b\5\2\36\37\7\b\2\2\37 \5\b\5\2 !\7\3\2\2!&\3\2\2\2\"&\t\3\2\2#&\7"+
-		"\30\2\2$&\7\27\2\2%\33\3\2\2\2%\36\3\2\2\2%\"\3\2\2\2%#\3\2\2\2%$\3\2"+
-		"\2\2&A\3\2\2\2\'(\6\5\2\3()\t\4\2\2)@\5\b\5\2*+\6\5\3\3+,\t\5\2\2,@\5"+
-		"\b\5\2-.\6\5\4\3./\t\6\2\2/@\5\b\5\2\60\61\6\5\5\3\61\62\t\7\2\2\62@\5"+
-		"\b\5\2\63\64\6\5\6\3\64\65\7\16\2\2\65@\5\b\5\2\66\67\6\5\7\3\678\7\20"+
-		"\2\28@\5\b\5\29:\6\5\b\3:;\7\17\2\2;<\5\b\5\2<=\7\7\2\2=>\5\b\5\2>@\3"+
-		"\2\2\2?\'\3\2\2\2?*\3\2\2\2?-\3\2\2\2?\60\3\2\2\2?\63\3\2\2\2?\66\3\2"+
-		"\2\2?9\3\2\2\2@C\3\2\2\2A?\3\2\2\2AB\3\2\2\2B\t\3\2\2\2CA\3\2\2\2DE\7"+
-		"\27\2\2E\13\3\2\2\2\6\22%?A";
+		"&\5\b\5\2\36\37\7\b\2\2\37 \5\b\5\2 !\7\3\2\2!&\3\2\2\2\"&\5\n\6\2#&\t"+
+		"\3\2\2$&\7\30\2\2%\33\3\2\2\2%\36\3\2\2\2%\"\3\2\2\2%#\3\2\2\2%$\3\2\2"+
+		"\2&A\3\2\2\2\'(\6\5\2\3()\t\4\2\2)@\5\b\5\2*+\6\5\3\3+,\t\5\2\2,@\5\b"+
+		"\5\2-.\6\5\4\3./\t\6\2\2/@\5\b\5\2\60\61\6\5\5\3\61\62\t\7\2\2\62@\5\b"+
+		"\5\2\63\64\6\5\6\3\64\65\7\16\2\2\65@\5\b\5\2\66\67\6\5\7\3\678\7\20\2"+
+		"\28@\5\b\5\29:\6\5\b\3:;\7\17\2\2;<\5\b\5\2<=\7\7\2\2=>\5\b\5\2>@\3\2"+
+		"\2\2?\'\3\2\2\2?*\3\2\2\2?-\3\2\2\2?\60\3\2\2\2?\63\3\2\2\2?\66\3\2\2"+
+		"\2?9\3\2\2\2@C\3\2\2\2A?\3\2\2\2AB\3\2\2\2B\t\3\2\2\2CA\3\2\2\2DE\7\27"+
+		"\2\2E\13\3\2\2\2\6\22%?A";
 	public static final ATN _ATN =
 		ATNSimulator.deserialize(_serializedATN.toCharArray());
 	static {

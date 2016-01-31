@@ -6,13 +6,27 @@ import java.util.Arrays;
  * @author Clément Garbay
  */
 public enum UnaryOperator implements Operator {
-    MINUS ("-"),
-    EXCLAMATION ("!");
+    EXCLAMATION ("!"),
+    MINUS ("-");
 
     private final String op;
 
     UnaryOperator(final String op) {
         this.op = op;
+    }
+
+    /**
+     * Checks if the operator is a boolean unary operator ('!').
+     */
+    public static boolean isBooleanOperator(Operator operator) {
+        return operator == UnaryOperator.EXCLAMATION;
+    }
+
+    /**
+     * Checks if the operator is an arithmetic unary operator ('-').
+     */
+    public static boolean isArithmeticOperator(Operator operator) {
+        return operator == UnaryOperator.MINUS;
     }
 
     public static UnaryOperator fromString(String op){

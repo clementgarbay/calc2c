@@ -37,6 +37,7 @@ public enum Type {
 
     /**
      * TOREVIEW : not fully functional for String type
+     * @return
      */
     public String getTypeInC() {
         return typeInC;

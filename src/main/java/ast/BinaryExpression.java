@@ -3,7 +3,6 @@ package ast;
 import error.IncompatibleOperatorException;
 import error.IncompatibleTypeException;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 /**
@@ -23,7 +22,6 @@ public class BinaryExpression extends Expression {
 
     @Override
     public Type getFinalType(List<Definition> definitions) {
-        if (this.expr1.getFinalType(definitions) != this.expr2.getFinalType(definitions)) throw new IncompatibleTypeException();
         if (BinaryOperator.isBooleanOperator(this.operator)) {
             return Type.BOOLEAN;
         }
@@ -31,14 +29,20 @@ public class BinaryExpression extends Expression {
     }
 
     @Override
-    public String gen(int padding) {
+    public void checkExpression(List<Definition> definitions) {
         // Type checking
-//        if (this.expr1.getFinalType() != this.expr2.getFinalType()) throw new IncompatibleTypeException();
+        if (this.expr1.getFinalType(definitions) != this.expr2.getFinalType(definitions)) throw new IncompatibleTypeException();
+        // Operator acceptance
+        if (!this.expr1.getFinalType(definitions).acceptsOperator(this.operator)) throw new IncompatibleOperatorException();
         // Division by 0
         if (this.operator.equals(BinaryOperator.DIVIDE) && this.expr2.equals(new IntegerType(0))) throw new ArithmeticException("Division by 0");
-        // Operator acceptance
-//        if (!this.expr1.getFinalType().acceptsOperator(this.operator)) throw new IncompatibleOperatorException();
 
+        this.expr1.checkExpression(definitions);
+        this.expr2.checkExpression(definitions);
+    }
+
+    @Override
+    public String gen(int padding) {
         return this.paddingToSpace(padding) + this.expr1.gen(0) + " " + this.operator.toString() + this.expr2.gen(1);
     }
 
