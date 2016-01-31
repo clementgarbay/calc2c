@@ -13,9 +13,17 @@ public class Definition extends AST {
         this.expression = expression;
     }
 
+    public Variable getVariable() {
+        return this.variable;
+    }
+
+    public Expression getExpression() {
+        return this.expression;
+    }
+
     @Override
     public String gen(int padding) {
-        return this.paddingToSpace(padding) + this.expression.getFinalType() + this.variable.gen(1) + " = " + this.expression.gen() + ";\n";
+        return this.variable.gen(padding) + " = " + this.expression.gen() + ";\n";
     }
 
     @Override

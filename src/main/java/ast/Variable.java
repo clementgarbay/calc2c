@@ -10,6 +10,10 @@ public class Variable extends AST {
         this.name = name;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String gen(int padding) {
         return this.paddingToSpace(padding) + this.name;

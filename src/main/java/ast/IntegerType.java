@@ -1,9 +1,11 @@
 package ast;
 
+import java.util.List;
+
 /**
  * @author Clément Garbay
  */
-public class IntegerType extends PrimitiveType {
+public class IntegerType extends PrimitiveType<Integer> {
 	private Integer value;
 
 	public IntegerType(Integer value) {
@@ -11,7 +13,7 @@ public class IntegerType extends PrimitiveType {
 	}
 
     @Override
-    public Type getFinalType() {
+    public Type getFinalType(List<Definition> definitions) {
         return Type.INTEGER;
     }
 
@@ -19,6 +21,11 @@ public class IntegerType extends PrimitiveType {
 	public String gen(int padding) {
 		return this.paddingToSpace(padding) + Integer.toString(this.value);
 	}
+
+    @Override
+    public Integer getValue() {
+        return this.value;
+    }
 
 	@Override
 	public boolean equals(Object obj) {

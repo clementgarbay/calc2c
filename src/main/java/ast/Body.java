@@ -14,21 +14,38 @@ public class Body extends AST {
 		this.expression = expression;
 	}
 
+    public void checkImmutablility() {
+         // TODO
+    }
+
 	@Override
 	public String gen(int padding) {
 		return this.expression.gen(4);
 	}
 
-	public String genMain() {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("\nint main() {\n");
+    public String genMain() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("\nint main() {\n");
+
+        // Definitions
         this.definitions.stream().forEach(definition -> {
-            stringBuilder.append(definition.gen(4));
+            stringBuilder.append(paddingToSpace(4));
+            stringBuilder.append(definition.getExpression().getFinalType(this.definitions).getTypeInC());
+            stringBuilder.append(definition.gen(1));
         });
-		stringBuilder.append(this.paddingToSpace(4)).append("return printf(\"%i\\n\", ").append(this.expression.gen(0)).append(");");
-		stringBuilder.append("\n}");
-		return stringBuilder.toString();
-	}
+
+        // Final expression
+        stringBuilder.append(this.paddingToSpace(4)).append("return printf(\"%i\\n\", ").append(this.expression.gen(0)).append(");");
+
+        /*stringBuilder.append(this.paddingToSpace(4)).append("return printf(\"");
+        stringBuilder.append(((this.expression.getFinalType() == Type.INTEGER || this.expression.getFinalType() == Type.BOOLEAN) ? "%i" : "%s"));
+        stringBuilder.append("\\n\", ").append(this.expression.gen(0)).append(");");*/
+
+        stringBuilder.append("\n}");
+
+        return stringBuilder.toString();
+    }
 
     @Override
     public String toString() {

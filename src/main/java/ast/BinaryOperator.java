@@ -55,6 +55,20 @@ public enum BinaryOperator implements Operator {
         return new HashSet<>(Arrays.asList(BinaryOperator.AND, BinaryOperator.OR));
     }
 
+    /**
+     * Checks if the operator is a boolean operator (equality, comparison or logical).
+     */
+    public static boolean isBooleanOperator(Operator operator) {
+        return getEqualityOperators().contains(operator) || getComparisonOperators().contains(operator) || getLogicalOperators().contains(operator);
+    }
+
+    /**
+     * Checks if the operator is an arithmetic operator.
+     */
+    public static boolean isArithmeticOperator(Operator operator) {
+        return getArithmeticOperators().contains(operator);
+    }
+
     public static BinaryOperator fromString(String op) {
         return Arrays.asList(BinaryOperator.values())
                 .stream()

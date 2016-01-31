@@ -1,5 +1,7 @@
 package ast;
 
+import java.util.List;
+
 /**
  * @author Clément Garbay
  */
@@ -14,8 +16,8 @@ public class UnaryExpression extends Expression {
     }
 
     @Override
-    public Type getFinalType() {
-        return this.expression.getFinalType();
+    public Type getFinalType(List<Definition> definitions) {
+        return this.expression.getFinalType(definitions);
     }
 
     @Override

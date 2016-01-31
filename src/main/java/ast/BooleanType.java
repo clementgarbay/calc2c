@@ -1,9 +1,11 @@
 package ast;
 
+import java.util.List;
+
 /**
  * @author Clément Garbay
  */
-public class BooleanType extends PrimitiveType {
+public class BooleanType extends PrimitiveType<Boolean> {
     private Boolean value;
 
     public BooleanType(Boolean value) {
@@ -11,13 +13,18 @@ public class BooleanType extends PrimitiveType {
     }
 
     @Override
-    public Type getFinalType() {
+    public Type getFinalType(List<Definition> definitions) {
         return Type.BOOLEAN;
     }
 
     @Override
     public String gen(int padding) {
         return this.paddingToSpace(padding) + Boolean.toString(this.value);
+    }
+
+    @Override
+    public Boolean getValue() {
+        return this.value;
     }
 
     @Override

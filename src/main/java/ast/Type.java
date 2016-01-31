@@ -35,6 +35,9 @@ public enum Type {
         this.acceptedOperators = acceptedOperators;
     }
 
+    /**
+     * TOREVIEW : not fully functional for String type
+     */
     public String getTypeInC() {
         return typeInC;
     }
