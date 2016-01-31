@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ASTVisitor extends CCalcBaseVisitor<AST> {
-	public AST visitProgram(CCalcParser.ProgramContext ctx) {
+    public AST visitProgram(CCalcParser.ProgramContext ctx) {
         // retrieve ASTs for functions
         List<CCalcParser.FunctionContext> functionCtxs = ctx.function();
         List<Function> functions = functionCtxs.stream().map(functionCtx -> (Function) visit(functionCtx)).collect(Collectors.toList());
@@ -15,7 +15,7 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
         Body body = (Body)visit(ctx.body());
         // return AST for program
         return new Program(functions, body);
-	}
+    }
 
     public AST visitFunction(CCalcParser.FunctionContext ctx) {
         Head head = (Head) visit(ctx.getChild(0));
@@ -35,16 +35,16 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
     }
 
 
-	public AST visitBody(CCalcParser.BodyContext ctx) {
+    public AST visitBody(CCalcParser.BodyContext ctx) {
         List<Definition> definitions = new ArrayList<>();
         ctx.definition()
                 .stream()
                 .forEach(def -> definitions.add((Definition) visit(def)));
 
-		Expression expr = (Expression)visit(ctx.expression());
+        Expression expr = (Expression)visit(ctx.expression());
 
-		return new Body(definitions, expr);
-	}
+        return new Body(definitions, expr);
+    }
 
     public AST visitDefinition(CCalcParser.DefinitionContext ctx) {
         VariableName variableName = (VariableName)visit(ctx.getChild(0));
@@ -52,9 +52,9 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
         return new Definition(variableName, expression);
     }
 
-	public AST visitIntegerType(CCalcParser.IntegerTypeContext ctx) {
+    public AST visitIntegerType(CCalcParser.IntegerTypeContext ctx) {
         return new IntegerType(Integer.parseInt(ctx.getText()));
-	}
+    }
 
     public AST visitBooleanType(CCalcParser.BooleanTypeContext ctx) {
         return new BooleanType(Boolean.parseBoolean(ctx.getText()));
@@ -68,10 +68,10 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
         return new VariableCall(ctx.getText());
     }
 
-	public AST visitParenthesizedExpression(CCalcParser.ParenthesizedExpressionContext ctx) {
-		Expression expr = (Expression)visit(ctx.expression());
-		return new ParenthesizedExpression(expr);
-	}
+    public AST visitParenthesizedExpression(CCalcParser.ParenthesizedExpressionContext ctx) {
+        Expression expr = (Expression)visit(ctx.expression());
+        return new ParenthesizedExpression(expr);
+    }
 
     public AST visitBinaryExpression(CCalcParser.BinaryExpressionContext ctx) {
         Expression expr1 = (Expression)visit(ctx.getChild(0));
