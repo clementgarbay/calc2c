@@ -18,7 +18,7 @@ public class CCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitBinaryExpression(@NotNull CCalcParser.BinaryExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBody(@NotNull CCalcParser.BodyContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -26,7 +26,7 @@ public class CCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitBody(@NotNull CCalcParser.BodyContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBinaryExpression(@NotNull CCalcParser.BinaryExpressionContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -42,7 +42,7 @@ public class CCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitProgram(@NotNull CCalcParser.ProgramContext ctx) { return visitChildren(ctx); }
+	@Override public T visitVariableName(@NotNull CCalcParser.VariableNameContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}
@@ -66,14 +66,6 @@ public class CCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitUnaryExpression(@NotNull CCalcParser.UnaryExpressionContext ctx) { return visitChildren(ctx); }
-
-	/**
-	 * {@inheritDoc}
-	 * <p/>
-	 * The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.
-	 */
 	@Override public T visitConditionalExpression(@NotNull CCalcParser.ConditionalExpressionContext ctx) { return visitChildren(ctx); }
 
 	/**
@@ -90,7 +82,47 @@ public class CCalcBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
-	@Override public T visitVariable(@NotNull CCalcParser.VariableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunctionCall(@NotNull CCalcParser.FunctionCallContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitFunction(@NotNull CCalcParser.FunctionContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitProgram(@NotNull CCalcParser.ProgramContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitUnaryExpression(@NotNull CCalcParser.UnaryExpressionContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitFunctionName(@NotNull CCalcParser.FunctionNameContext ctx) { return visitChildren(ctx); }
+
+	/**
+	 * {@inheritDoc}
+	 * <p/>
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+	@Override public T visitHead(@NotNull CCalcParser.HeadContext ctx) { return visitChildren(ctx); }
 
 	/**
 	 * {@inheritDoc}

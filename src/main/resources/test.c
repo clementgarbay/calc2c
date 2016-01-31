@@ -1,8 +1,11 @@
 #include <stdio.h> 
 #include <stdbool.h> 
 
+int test() {
+    return 3;
+}
+
 int main() {
-    char[] a = "salut";
-    int b = 2;
-    return printf("%s\n", a);
+    int a = test();
+    return printf("%i\n", a);
 }

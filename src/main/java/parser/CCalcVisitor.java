@@ -12,18 +12,18 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link CCalcParser#BinaryExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBinaryExpression(@NotNull CCalcParser.BinaryExpressionContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link CCalcParser#body}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitBody(@NotNull CCalcParser.BodyContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CCalcParser#BinaryExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinaryExpression(@NotNull CCalcParser.BinaryExpressionContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link CCalcParser#definition}.
@@ -33,11 +33,11 @@ public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
 	T visitDefinition(@NotNull CCalcParser.DefinitionContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link CCalcParser#program}.
+	 * Visit a parse tree produced by {@link CCalcParser#variableName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitProgram(@NotNull CCalcParser.ProgramContext ctx);
+	T visitVariableName(@NotNull CCalcParser.VariableNameContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link CCalcParser#ParenthesizedExpression}.
@@ -54,13 +54,6 @@ public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
 	T visitIntegerType(@NotNull CCalcParser.IntegerTypeContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link CCalcParser#UnaryExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUnaryExpression(@NotNull CCalcParser.UnaryExpressionContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link CCalcParser#ConditionalExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -75,11 +68,46 @@ public interface CCalcVisitor<T> extends ParseTreeVisitor<T> {
 	T visitVariableCall(@NotNull CCalcParser.VariableCallContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link CCalcParser#variable}.
+	 * Visit a parse tree produced by {@link CCalcParser#FunctionCall}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVariable(@NotNull CCalcParser.VariableContext ctx);
+	T visitFunctionCall(@NotNull CCalcParser.FunctionCallContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CCalcParser#function}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunction(@NotNull CCalcParser.FunctionContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CCalcParser#program}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProgram(@NotNull CCalcParser.ProgramContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CCalcParser#UnaryExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnaryExpression(@NotNull CCalcParser.UnaryExpressionContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CCalcParser#functionName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionName(@NotNull CCalcParser.FunctionNameContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link CCalcParser#head}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHead(@NotNull CCalcParser.HeadContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link CCalcParser#BooleanType}.

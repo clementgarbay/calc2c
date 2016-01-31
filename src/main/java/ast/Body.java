@@ -43,7 +43,7 @@ public class Body extends AST {
                 return super.add(variableName);
             }
         };
-        this.definitions.stream().forEach(definition -> set.add(definition.getVariable().getName()));
+        this.definitions.stream().forEach(definition -> set.add(definition.getVariableName().getName()));
         if (duplicatedVariables.size() > 0) {
             throw new ImmutableException("Variables " + duplicatedVariables.toString() + " are defined multiple times.");
         }
@@ -51,7 +51,18 @@ public class Body extends AST {
 
 	@Override
 	public String gen(int padding) {
-		return this.expression.gen(4);
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Definition definition : this.definitions) {
+            stringBuilder.append(super.paddingToSpace(4));
+            stringBuilder.append(definition.getExpression().getFinalType(this.definitions).getTypeInC());
+            stringBuilder.append(definition.gen(1));
+        }
+
+        stringBuilder.append(super.paddingToSpace(4));
+        stringBuilder.append("return").append(this.expression.gen(1)).append(";");
+
+		return stringBuilder.toString();
 	}
 
     public String genMain() {

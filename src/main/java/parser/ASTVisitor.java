@@ -8,17 +8,27 @@ import java.util.List;
 public class ASTVisitor extends CCalcBaseVisitor<AST> {
 	public AST visitProgram(CCalcParser.ProgramContext ctx) {
         // retrieve ASTs for functions
-//        List<CCalcParser.FunctionContext> functionCtxs = ctx.function();
-//        List<Function> functions = new ArrayList<Function>();
-//        for (CCalcParser.FunctionContext functionCtx : functionCtxs)
-//          functions.add((Function)visit(functionCtx));
+        List<CCalcParser.FunctionContext> functionCtxs = ctx.function();
+        List<Function> functions = new ArrayList<>();
+        for (CCalcParser.FunctionContext functionCtx : functionCtxs)
+          functions.add((Function)visit(functionCtx));
         // retrieve AST for body
         Body body = (Body)visit(ctx.body());
         // return AST for program
-//        return new Program(functions, body);
-        return new Program(body);
+        return new Program(functions, body);
 	}
-	
+
+    public AST visitFunction(CCalcParser.FunctionContext ctx) {
+        Head head = (Head) visit(ctx.getChild(0));
+        Body body = (Body) visit(ctx.getChild(1));
+        return new Function(head, body);
+    }
+
+    public AST visitHead(CCalcParser.HeadContext ctx) {
+        FunctionName functionName = (FunctionName)visit(ctx.getChild(0));
+        return new Head(functionName);
+    }
+
 	public AST visitBody(CCalcParser.BodyContext ctx) {
         List<Definition> definitions = new ArrayList<>();
 
@@ -31,14 +41,10 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
 		return new Body(definitions, expr);
 	}
 
-    public AST visitVariable(CCalcParser.VariableContext ctx) {
-        return new Variable(ctx.getText());
-    }
-
     public AST visitDefinition(CCalcParser.DefinitionContext ctx) {
-        Variable variable = (Variable)visit(ctx.getChild(0));
+        VariableName variableName = (VariableName)visit(ctx.getChild(0));
         Expression expression = (Expression) visit(ctx.getChild(2));
-        return new Definition(variable, expression);
+        return new Definition(variableName, expression);
     }
 
 	public AST visitIntegerType(CCalcParser.IntegerTypeContext ctx) {
@@ -47,6 +53,10 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
 
     public AST visitBooleanType(CCalcParser.BooleanTypeContext ctx) {
         return new BooleanType(Boolean.parseBoolean(ctx.getText()));
+    }
+
+    public AST visitVariableName(CCalcParser.VariableNameContext ctx) {
+        return new VariableName(ctx.getText());
     }
 
     public AST visitVariableCall(CCalcParser.VariableCallContext ctx) {
@@ -76,5 +86,13 @@ public class ASTVisitor extends CCalcBaseVisitor<AST> {
         Expression expr2 = (Expression)visit(ctx.getChild(2));
         Expression expr3 = (Expression)visit(ctx.getChild(4));
         return new ConditionalExpression(expr1, expr2, expr3);
+    }
+
+    public AST visitFunctionName(CCalcParser.FunctionNameContext ctx) {
+        return new FunctionName(ctx.getText());
+    }
+
+    public AST visitFunctionCall(CCalcParser.FunctionCallContext ctx) {
+        return new FunctionCall(ctx.getChild(0).getText());
     }
 }

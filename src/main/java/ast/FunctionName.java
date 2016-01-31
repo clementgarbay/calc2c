@@ -3,10 +3,11 @@ package ast;
 /**
  * @author Clément Garbay
  */
-public class Variable extends AST {
+public class FunctionName extends AST {
+
     private String name;
 
-    public Variable(String name) {
+    public FunctionName(String name) {
         this.name = name;
     }
 
@@ -16,11 +17,11 @@ public class Variable extends AST {
 
     @Override
     public String gen(int padding) {
-        return this.paddingToSpace(padding) + this.name;
+        return this.paddingToSpace(padding) + this.name + "()";
     }
 
     @Override
     public String toString() {
-        return "Variable(" + this.name + ")";
+        return "FunctionName(" + this.name + ")";
     }
 }

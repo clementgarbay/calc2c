@@ -5,16 +5,16 @@ package ast;
  */
 public class Definition extends AST {
 
-    private Variable variable;
+    private VariableName variableName;
     private Expression expression;
 
-    public Definition(Variable variable, Expression expression) {
-        this.variable = variable;
+    public Definition(VariableName variableName, Expression expression) {
+        this.variableName = variableName;
         this.expression = expression;
     }
 
-    public Variable getVariable() {
-        return this.variable;
+    public VariableName getVariableName() {
+        return this.variableName;
     }
 
     public Expression getExpression() {
@@ -23,11 +23,11 @@ public class Definition extends AST {
 
     @Override
     public String gen(int padding) {
-        return this.variable.gen(padding) + " = " + this.expression.gen() + ";\n";
+        return this.variableName.gen(padding) + " = " + this.expression.gen() + ";\n";
     }
 
     @Override
     public String toString() {
-        return "Definition(" + this.variable + ", " + this.expression + ")";
+        return "Definition(" + this.variableName + ", " + this.expression + ")";
     }
 }

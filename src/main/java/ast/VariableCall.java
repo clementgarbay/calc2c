@@ -18,7 +18,7 @@ public class VariableCall extends Expression {
     @Override
     public Type getFinalType(List<Definition> definitions) {
         for (Definition definition : definitions) {
-            if (definition.getVariable().getName().equals(this.variableName)) {
+            if (definition.getVariableName().getName().equals(this.variableName)) {
                 return definition.getExpression().getFinalType(definitions);
             }
         }

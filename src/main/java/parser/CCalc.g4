@@ -2,11 +2,15 @@ grammar CCalc;
 
 // syntactic rules
 
-program     : body EOF
+program     : function* body EOF
+            ;
+function    : head body
+            ;
+head        : functionName '()'
             ;
 body        : definition* expression
             ;
-definition  : variable '=' expression
+definition  : variableName '=' expression
             ;
 expression  : ('-' | '!') expression                                 # UnaryExpression
             | expression ('*' | '/') expression                      # BinaryExpression
@@ -17,11 +21,14 @@ expression  : ('-' | '!') expression                                 # UnaryExpr
             | expression ('||') expression                           # BinaryExpression
             | expression '?'<assoc=right> expression ':' expression  # ConditionalExpression
             | '(' expression ')'                                     # ParenthesizedExpression
-            | variable                                               # VariableCall
+            | variableName                                           # VariableCall
+            | functionName '()'                                      # FunctionCall
             | ('true' | 'false')                                     # BooleanType
             | INT                                                    # IntegerType
             ;  
-variable    : IDENTIFIER
+variableName: IDENTIFIER
+            ;
+functionName: IDENTIFIER
             ;
 
 // lexical rules
