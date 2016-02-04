@@ -15,16 +15,15 @@ public class Program extends AST {
         this.body = body;
     }
 
+    /**
+     * Magic method to find all the possible errors in the body of the function
+     */
     public void errorsControl() {
         this.body.errorsControl(this.functions);
     }
 
     @Override
-	public String gen(int padding) {
-		return "";
-	}
-
-    public String gen() {
+    public String gen(int padding) {
         this.errorsControl();
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -35,9 +34,7 @@ public class Program extends AST {
         stringBuilder.append("\n");
 
         // Functions
-        for (Function function : this.functions) {
-            stringBuilder.append(function.gen());
-        }
+        this.functions.stream().forEach(function -> stringBuilder.append(function.gen()));
 
         // Main
         stringBuilder.append(this.body.genMain(this.functions));

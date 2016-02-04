@@ -3,12 +3,13 @@ package ast;
 import error.FunctionNotFoundException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * @author Clément Garbay
+ *
+ * TODO : review the duplicate code
  */
 public class FunctionCall extends Expression {
     private FunctionName functionName;
