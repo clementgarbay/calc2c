@@ -40,7 +40,7 @@ public class Program extends AST {
         }
 
         // Main
-        stringBuilder.append(this.body.genMain());
+        stringBuilder.append(this.body.genMain(this.functions));
 
         return stringBuilder.toString();
     }

@@ -1,0 +1,2 @@
+test(a,b) (a == 1) ? true : 20
+test(3,10)

@@ -13,8 +13,8 @@ public class ParenthesizedExpression extends Expression {
     }
 
     @Override
-    public Type getFinalType(List<Definition> definitions) {
-        return this.expression.getFinalType(definitions);
+    public Type getFinalType(List<Definition> definitions, List<Function> functions) {
+        return this.expression.getFinalType(definitions, functions);
     }
 
     @Override

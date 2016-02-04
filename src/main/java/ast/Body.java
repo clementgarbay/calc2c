@@ -19,6 +19,13 @@ public class Body extends AST {
 		this.expression = expression;
 	}
 
+    public Type getFinalType(List<Definition> definitions, List<Function> functions) {
+        List<Definition> def = new ArrayList<>();
+        this.definitions.stream().forEach(def::add);
+        def.addAll(definitions);
+        return this.expression.getFinalType(def, functions);
+    }
+
     public void checkErrors(List<Definition> definitions, List<Function> functions) {
         List<Definition> def = new ArrayList<>();
         this.definitions.stream().forEach(def::add);
@@ -63,7 +70,7 @@ public class Body extends AST {
 
         for (Definition definition : this.definitions) {
             stringBuilder.append(super.paddingToSpace(4));
-            stringBuilder.append(definition.getExpression().getFinalType(this.definitions).getTypeInC());
+            stringBuilder.append(definition.getExpression().getFinalType(this.definitions, new ArrayList<>()).getTypeInC());
             stringBuilder.append(definition.gen(1));
         }
 
@@ -73,20 +80,20 @@ public class Body extends AST {
 		return stringBuilder.toString();
 	}
 
-    public String genMain() {
+    public String genMain(List<Function> functions) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\nint main() {\n");
 
         // Definitions
         this.definitions.stream().forEach(definition -> {
             stringBuilder.append(super.paddingToSpace(4));
-            stringBuilder.append(definition.getExpression().getFinalType(this.definitions).getTypeInC());
+            stringBuilder.append(definition.getExpression().getFinalType(this.definitions, functions).getTypeInC());
             stringBuilder.append(definition.gen(1));
         });
 
         // Final expression
         stringBuilder.append(super.paddingToSpace(4));
-        if (this.expression.getFinalType(this.definitions) == Type.STRING) {
+        if (this.expression.getFinalType(this.definitions, functions) == Type.STRING) {
             stringBuilder.append("return printf(\"%s\\n\", ");
         } else {
             stringBuilder.append("return printf(\"%i\\n\", ");

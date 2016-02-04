@@ -16,10 +16,10 @@ public class VariableCall extends Expression {
     }
 
     @Override
-    public Type getFinalType(List<Definition> definitions) {
+    public Type getFinalType(List<Definition> definitions, List<Function> functions) {
         for (Definition definition : definitions) {
             if (definition.getVariableName().getName().equals(this.variableName)) {
-                return definition.getExpression().getFinalType(definitions);
+                return definition.getExpression().getFinalType(definitions, functions);
             }
         }
 

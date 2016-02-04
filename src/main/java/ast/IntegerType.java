@@ -13,7 +13,7 @@ public class IntegerType extends PrimitiveType<Integer> {
 	}
 
     @Override
-    public Type getFinalType(List<Definition> definitions) {
+    public Type getFinalType(List<Definition> definitions, List<Function> functions) {
         return Type.INTEGER;
     }
 

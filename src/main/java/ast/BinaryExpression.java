@@ -21,19 +21,19 @@ public class BinaryExpression extends Expression {
     }
 
     @Override
-    public Type getFinalType(List<Definition> definitions) {
+    public Type getFinalType(List<Definition> definitions, List<Function> functions) {
         if (BinaryOperator.isBooleanOperator(this.operator)) {
             return Type.BOOLEAN;
         }
-        return this.expr1.getFinalType(definitions);
+        return this.expr1.getFinalType(definitions, functions);
     }
 
     @Override
     public void checkExpressionErrors(List<Definition> definitions, List<Function> functions) {
         // Type checking
-        if (this.expr1.getFinalType(definitions) != this.expr2.getFinalType(definitions)) throw new IncompatibleTypeException();
+        if (this.expr1.getFinalType(definitions, functions) != this.expr2.getFinalType(definitions, functions)) throw new IncompatibleTypeException();
         // Operator acceptance
-        if (!this.expr1.getFinalType(definitions).acceptsOperator(this.operator)) throw new IncompatibleOperatorException();
+        if (!this.expr1.getFinalType(definitions, functions).acceptsOperator(this.operator)) throw new IncompatibleOperatorException();
         // Division by 0
         if (this.operator.equals(BinaryOperator.DIVIDE) && this.expr2.equals(new IntegerType(0))) throw new ArithmeticException("Division by 0");
 

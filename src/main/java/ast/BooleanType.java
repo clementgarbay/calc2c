@@ -13,7 +13,7 @@ public class BooleanType extends PrimitiveType<Boolean> {
     }
 
     @Override
-    public Type getFinalType(List<Definition> definitions) {
+    public Type getFinalType(List<Definition> definitions, List<Function> functions) {
         return Type.BOOLEAN;
     }
 

@@ -20,16 +20,16 @@ public class ConditionalExpression extends Expression {
     }
 
     @Override
-    public Type getFinalType(List<Definition> definitions) {
-        return this.expr2.getFinalType(definitions);
+    public Type getFinalType(List<Definition> definitions, List<Function> functions) {
+        return this.expr2.getFinalType(definitions, functions);
     }
 
     @Override
     public void checkExpressionErrors(List<Definition> definitions, List<Function> functions) {
         // Type checking
-        if (this.expr2.getFinalType(definitions) != this.expr3.getFinalType(definitions)) throw new IncompatibleTypeException();
+        if (this.expr2.getFinalType(definitions, functions) != this.expr3.getFinalType(definitions, functions)) throw new IncompatibleTypeException();
         // Condition must be boolean
-        if (this.expr1.getFinalType(definitions) != Type.BOOLEAN) throw new IncompatibleTypeException();
+        if (this.expr1.getFinalType(definitions, functions) != Type.BOOLEAN) throw new IncompatibleTypeException();
 
         this.expr1.checkExpressionErrors(definitions, functions);
         this.expr2.checkExpressionErrors(definitions, functions);

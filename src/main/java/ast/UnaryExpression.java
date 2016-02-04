@@ -18,14 +18,14 @@ public class UnaryExpression extends Expression {
     }
 
     @Override
-    public Type getFinalType(List<Definition> definitions) {
-        return this.expression.getFinalType(definitions);
+    public Type getFinalType(List<Definition> definitions, List<Function> functions) {
+        return this.expression.getFinalType(definitions, functions);
     }
 
     @Override
     public void checkExpressionErrors(List<Definition> definitions, List<Function> functions) {
         // Operator acceptance
-        if (!this.expression.getFinalType(definitions).acceptsOperator(this.operator)) throw new IncompatibleOperatorException();
+        if (!this.expression.getFinalType(definitions, functions).acceptsOperator(this.operator)) throw new IncompatibleOperatorException();
 
         this.expression.checkExpressionErrors(definitions, functions);
     }

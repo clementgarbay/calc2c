@@ -13,7 +13,7 @@ public class StringType extends PrimitiveType<String> {
     }
 
     @Override
-    public Type getFinalType(List<Definition> definitions) {
+    public Type getFinalType(List<Definition> definitions, List<Function> functions) {
         return Type.STRING;
     }
 
