@@ -19,6 +19,7 @@ public abstract class Expression extends AST {
      * Find the various expression error (type, undefined variable, arithmetic, operator acceptance, ...).
      *
      * @param definitions
+     * @param functions
      */
-    public abstract void checkExpressionErrors(List<Definition> definitions); // List<VariableName> knownParameterVariables
+    public abstract void checkExpressionErrors(List<Definition> definitions, List<Function> functions);
 }

@@ -16,6 +16,14 @@ public class Head extends AST {
         this.parameters = parameters;
     }
 
+    public FunctionName getFunctionName() {
+        return this.functionName;
+    }
+
+    public List<VariableName> getParameters() {
+        return this.parameters;
+    }
+
     @Override
     public String gen(int padding) {
         String params = this.parameters.stream()

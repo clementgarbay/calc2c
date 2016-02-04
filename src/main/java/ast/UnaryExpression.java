@@ -23,11 +23,11 @@ public class UnaryExpression extends Expression {
     }
 
     @Override
-    public void checkExpressionErrors(List<Definition> definitions) {
+    public void checkExpressionErrors(List<Definition> definitions, List<Function> functions) {
         // Operator acceptance
         if (!this.expression.getFinalType(definitions).acceptsOperator(this.operator)) throw new IncompatibleOperatorException();
 
-        this.expression.checkExpressionErrors(definitions);
+        this.expression.checkExpressionErrors(definitions, functions);
     }
 
     @Override

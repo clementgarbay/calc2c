@@ -21,6 +21,13 @@ public class FunctionName extends AST {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof FunctionName)) return false;
+        FunctionName functionName = (FunctionName) obj;
+        return this.name.equals(functionName.getName());
+    }
+
+    @Override
     public String toString() {
         return "FunctionName(" + this.name + ")";
     }

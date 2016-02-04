@@ -13,6 +13,14 @@ public class Function extends AST {
         this.body = body;
     }
 
+    public Head getHead() {
+        return this.head;
+    }
+
+    public Body getBody() {
+        return this.body;
+    }
+
     @Override
     public String gen(int padding) {
         StringBuilder stringBuilder = new StringBuilder();

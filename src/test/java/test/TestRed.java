@@ -16,6 +16,7 @@ public class TestRed extends Test {
 		test(verbose, PATH + "red5.calc", "function and call with a parameter", "11");
 		test(verbose, PATH + "red6.calc", "call with a composed expression", "12");
 		test(verbose, PATH + "red10.calc", "mutually recursive functions", "1");
+		test(verbose, PATH + "red11.calc", "function test1 not found", "error");
 
 		report();
 	}

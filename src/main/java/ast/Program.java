@@ -15,12 +15,18 @@ public class Program extends AST {
         this.body = body;
     }
 
+    public void errorsControl() {
+        this.body.errorsControl(this.functions);
+    }
+
     @Override
 	public String gen(int padding) {
 		return "";
 	}
 
     public String gen() {
+        this.errorsControl();
+
         StringBuilder stringBuilder = new StringBuilder();
 
         // Includes

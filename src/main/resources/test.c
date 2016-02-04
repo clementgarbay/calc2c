@@ -1,10 +1,10 @@
 #include <stdio.h> 
 #include <stdbool.h> 
 
-int test(x, y) {
-    return x + b;
+int test(a) {
+    return a + 1;
 }
 
 int main() {
-    return printf("%i\n", test(10, 0));
+    return printf("%i\n", test1());
 }

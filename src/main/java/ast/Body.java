@@ -19,19 +19,26 @@ public class Body extends AST {
 		this.expression = expression;
 	}
 
+    public void checkErrors(List<Definition> definitions, List<Function> functions) {
+        List<Definition> def = new ArrayList<>();
+        this.definitions.stream().forEach(def::add);
+        def.addAll(definitions);
+        this.expression.checkExpressionErrors(def, functions);
+    }
+
     /**
      * Magic method to find all the possible errors (type, undefined variable, arithmetic, operator acceptance, immutability problems, ...).
      */
-    public void errorsControl() {
+    public void errorsControl(List<Function> functions) {
         // Check expressions errors in definitions
         List<Definition> definitionsProcessed = new ArrayList<>();
         for (Definition definition: this.definitions) {
             definitionsProcessed.add(definition);
-            definition.getExpression().checkExpressionErrors(definitionsProcessed);
+            definition.getExpression().checkExpressionErrors(definitionsProcessed, functions);
         }
 
         // Check body expression errors
-        this.expression.checkExpressionErrors(this.definitions);
+        this.expression.checkExpressionErrors(this.definitions, functions);
 
         // Check immutable definitions
         final List<String> duplicatedVariables = new ArrayList<>();
@@ -67,9 +74,6 @@ public class Body extends AST {
 	}
 
     public String genMain() {
-
-        this.errorsControl();
-
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\nint main() {\n");
 

@@ -18,8 +18,8 @@ public class ParenthesizedExpression extends Expression {
     }
 
     @Override
-    public void checkExpressionErrors(List<Definition> definitions) {
-        this.expression.checkExpressionErrors(definitions);
+    public void checkExpressionErrors(List<Definition> definitions, List<Function> functions) {
+        this.expression.checkExpressionErrors(definitions, functions);
     }
 
     @Override
