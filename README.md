@@ -49,6 +49,10 @@ a = 23
 a = 8 + a
 ```
 
+### Function exceptions
+
+Lors de l'appel à une fonction, plusieurs tests d'erreurs sont lancées. Si la fonction appelée n'existe pas une exception du type *UndefinedFunctionException* se produit. Si le nombre d'arguments lors de l'appel d'une fonction ne correspond pas avec le nombre d'arguments dans la déclaration de la fonction, une exception du type *IllegalArgumentException* sera lancée. De plus, l'ensemble des tests précédemment décrit sera effectué dans le corps de la fonction avec comme déclarations connues les expressions passées en paramètre lors de l'appel.
+
 ## Syntaxe
 
 La syntaxe est assez commune à beaucoup de langage. 
