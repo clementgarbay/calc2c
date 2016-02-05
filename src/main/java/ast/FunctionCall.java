@@ -1,6 +1,6 @@
 package ast;
 
-import error.FunctionNotFoundException;
+import error.UndefinedFunctionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class FunctionCall extends Expression {
         Function function = functions.stream()
                 .filter(func -> func.getHead().getFunctionName().equals(this.functionName))
                 .findFirst()
-                .orElseThrow(() -> new FunctionNotFoundException("Function " + this.functionName.getName() + " is not found"));
+                .orElseThrow(() -> new UndefinedFunctionException("Function " + this.functionName.getName() + " is not found"));
 
         // Match the real parameter name with expression in this function call (with the parameters order)
         List<VariableName> functionRealParameters = function.getHead().getParameters();
@@ -50,7 +50,7 @@ public class FunctionCall extends Expression {
         Function function = functions.stream()
                 .filter(func -> func.getHead().getFunctionName().equals(this.functionName))
                 .findFirst()
-                .orElseThrow(() -> new FunctionNotFoundException("Function " + this.functionName.getName() + " is not found"));
+                .orElseThrow(() -> new UndefinedFunctionException("Function " + this.functionName.getName() + " is not found"));
 
         // Match the real parameter name with expression in this function call (with the parameters order)
         List<VariableName> functionRealParameters = function.getHead().getParameters();
