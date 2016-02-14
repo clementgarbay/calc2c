@@ -1,7 +1,8 @@
 package test;
 
 public class TestGreen extends Test {
-	/**
+
+    /**
 	 * Entry point. Executes all the tests. 
 	 * 
 	 * @param args

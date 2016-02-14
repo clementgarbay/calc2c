@@ -1,25 +1,14 @@
-# calc2c - Clément GARBAY
+# calc2c
 
-## Avancement 
+Compilateur permettant de transformer des fichiers d'extension `.calc` en fichier `.c` permettant d'être compilé et exécuté par la suite.  
+Pour réaliser cette transformation un arbre syntaxique est créé avec les différents éléments représentant les parties du programme Calc. 
+L'outil ANTLRWorks est utilisé afin de générer un parser à partir d'une grammaire. Celle-ci est définie dans le fichier CCalc.g4 dans le package *parser*.
 
-Analyse lexicale et compilation en code C terminée pour la piste verte, bleu et rouge. 
 
-## Pour aller plus loin
+## Utilisation
 
-Les tests de la piste rouge ne me semblait pas complet. J'en ai donc rajouté. 
-Ils permettent notamment de vérifier l'existence de la function appelée, la cohérence du nombre d'arguments, de faire l'ensemble des vérifications d'erreurs dans le body de la fonction et de vérifier le bon type lors de l'appel d'une fonction (type de retour). 
-Il n'était pas forcément demandé de vérifier toutes ces caractéristiques mais cela m'a semblé intéressant à réaliser.
-
-## Blocages
-
-Tous les tests passent sauf 1 test de la piste verte (le numéro 26) : `1 / (1 - 1)`. En effet, dans l'état actuel du développement il n'y a aucun moyen de savoir si le dénominateur sera au final égal à 0 (sauf si c'est directement un entier égal à 0).
-De même 1 test de la piste rouge ne passe pas (le numéro 10) :
-```
-even(x) x==0 ? true : odd(x-1)
-odd(x) x==1 ? true : even(x-1)
-even(4)
-```
-En effet, j'effectue une vérification du bon typage d'une conditionnelle. Plus précisément, le type des deux expressions doivent être égaux (cf. type(true) == type(odd(x-1)) ). Or, les fonctions étant mutuellement récursives il est impossible de savoir le type de `even` sans connaître celui de `odd` et vice-versa. Notons que sans cette vérification poussée des types, ce test passe.
+La méthode principale de la classe *CCalc* attend en entrée un fichier `.calc` à compiler. Cette méthode génèrera un fichier `.c` correspondant. 
+Il est ensuite aisé de compiler ce fichier C généré avec un compilateur tel que LLVM ou GCC pour obtenir un résultat concret. Cette méthode est d'ailleurs utilisée par les différentes classes de test pour comparer le résultat du fichier calc à tester et un résultat attendu.
 
 ## Vérification d'erreurs pré-compilation en C
 
@@ -78,3 +67,18 @@ variable = 34 - 2
 sum(x,y) x + y
 > sum(8,17)
 ```
+
+## Problèmes connus
+
+Tous les tests passent sauf 1 test de la piste verte (le numéro 26) : `1 / (1 - 1)`. En effet, dans l'état actuel du développement il n'y a aucun moyen de savoir si le dénominateur sera au final égal à 0 (sauf si c'est directement un entier égal à 0).
+De même 1 test de la piste rouge ne passe pas (le numéro 10) :
+```
+even(x) x==0 ? true : odd(x-1)
+odd(x) x==1 ? true : even(x-1)
+even(4)
+```
+En effet, j'effectue une vérification du bon typage d'une conditionnelle. Plus précisément, le type des deux expressions doivent être égaux (cf. type(true) == type(odd(x-1)) ). Or, les fonctions étant mutuellement récursives il est impossible de savoir le type de `even` sans connaître celui de `odd` et vice-versa. Notons que sans cette vérification poussée des types, ce test passe.
+
+## Améliorations
+
+* Gestion des chaines de caractères (le type *String* est déjà implémenté)
